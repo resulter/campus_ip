@@ -1,0 +1,10 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Oct 10 17:54:36 CST 2017
+http\://repo.maven.apache.org/maven2/.lastUpdated=1506654629087
+http\://download.java.net/maven/2/.lastUpdated=1506654628071
+http\://192.168.10.222\:8082/nexus/content/groups/public/.lastUpdated=1507629276340
+@default-http\://maven.oschina.net/content/groups/public/.lastUpdated=1506654627122
+http\://repo.spring.io/release/.lastUpdated=1506654628367
+http\://repo.spring.io/release/.error=
+http\://download.java.net/maven/2/.error=
+http\://maven.oschina.net/content/groups/public/.error=Could not transfer artifact com.fasterxml\:classmate\:pom\:1.0.0 from/to oschina-repos (http\://maven.oschina.net/content/groups/public)\: connect timed out

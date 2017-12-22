@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie</groupId>
+    <artifactId>kie-parent-with-dependencies</artifactId>
+    <version>6.5.0.Final</version>
+  </parent>
+
+  <artifactId>kie-eap-integration</artifactId>
+  <packaging>pom</packaging>
+  <name>KIE EAP - Drools and jBPM Module layers for JBoss EAP</name>
+
+  <repositories>
+    <!-- Bootstrap repository to locate the parent pom when the parent pom has not been build locally. -->
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <properties>
+    <version.fuse.patch>1.6.2</version.fuse.patch>
+  </properties>
+
+  <modules>
+    <module>kie-jboss-modules-plugin</module>
+    <module>kie-eap-modules</module>
+    <module>kie-eap-config</module>
+    <module>kie-eap-distributions</module>
+    <module>kie-eap-installer</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-eap-distributions-bpms-layer</artifactId>
+        <version>${version.org.kie}</version>
+        <type>zip</type>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-eap-config</artifactId>
+        <version>${version.org.kie}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-eap-distribution</artifactId>
+        <version>${version.org.kie}</version>
+        <type>zip</type>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.extras.patch</groupId>
+        <artifactId>fuse-patch-config</artifactId>
+        <version>${version.fuse.patch}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.extras.patch</groupId>
+        <artifactId>fuse-patch-installer</artifactId>
+        <version>${version.fuse.patch}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-plugin-versions</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </execution>
+          <!-- EAP base modules have lot's of hardcoded versions, this needs to be fixed eventually. -->
+          <execution>
+            <id>no-managed-deps</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

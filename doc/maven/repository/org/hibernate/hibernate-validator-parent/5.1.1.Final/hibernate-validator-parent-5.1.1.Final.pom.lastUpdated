@@ -1,0 +1,10 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Oct 10 17:54:36 CST 2017
+http\://repo.maven.apache.org/maven2/.lastUpdated=1506654529496
+http\://download.java.net/maven/2/.lastUpdated=1506654527961
+http\://192.168.10.222\:8082/nexus/content/groups/public/.lastUpdated=1507629276117
+@default-http\://maven.oschina.net/content/groups/public/.lastUpdated=1506654526837
+http\://repo.spring.io/release/.lastUpdated=1506654528268
+http\://repo.spring.io/release/.error=
+http\://download.java.net/maven/2/.error=
+http\://maven.oschina.net/content/groups/public/.error=Could not transfer artifact org.hibernate\:hibernate-validator-parent\:pom\:5.1.1.Final from/to oschina-repos (http\://maven.oschina.net/content/groups/public)\: connect timed out

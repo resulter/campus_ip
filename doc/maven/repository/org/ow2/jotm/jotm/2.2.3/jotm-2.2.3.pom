@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - JOTM: Java Open Transaction Manager 
+  - Copyright (C) 1999-2011 Bull S.A.S.
+  - Contact: jotm@ow2.org
+  -
+  - Redistribution and use in source and binary forms, with or without 
+  - modification, are permitted provided that the following conditions are met:
+  -
+  - -Redistributions of source code must retain the above copyright notice, this
+  - list of conditions and the following disclaimer. 
+  -
+  - -Redistributions in binary form must reproduce the above copyright notice, 
+  - this list of conditions and the following disclaimer in the documentation 
+  - and/or other materials provided with the distribution. 
+  -
+  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  - AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+  - IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+  - ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+  - LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+  - CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+  - SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+  - INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+  - CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  - ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+  - POSSIBILITY OF SUCH DAMAGE.
+  -
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - $Id: pom.xml 1168 2011-10-21 14:18:45Z benoitf $
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.ow2</groupId>
+    <artifactId>ow2</artifactId>
+    <version>1.3</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.ow2.jotm</groupId>
+  <artifactId>jotm</artifactId>
+  <packaging>pom</packaging>
+  <name>JOTM</name>
+  <version>2.2.3</version>
+  <url>http://jotm.ow2.org</url>
+  <inceptionYear>2005</inceptionYear>
+  <description>JOTM: Java Open Transaction Manager</description>
+  <issueManagement>
+    <system>forge</system>
+    <url>http://forge.objectweb.org/tracker/?group_id=19</url>
+  </issueManagement>
+  <developers />
+  <contributors />
+
+  <licenses>
+    <license>
+     <name>BSD-style License</name>
+     <url>http://www.opensource.org/licenses/bsd-license.php</url>
+    </license>
+  </licenses>
+
+  <properties>
+    <ow2.spec.version>1.0.8</ow2.spec.version>
+    <carol.version>3.0.8</carol.version>
+    <carol-interceptors.version>1.0.1</carol-interceptors.version>
+    <jcl.version>1.1</jcl.version>
+    <joram.version>5.0.9</joram.version>
+    <cli.version>1.1</cli.version>
+    <howl.version>1.0.1-1</howl.version>
+    <xapool.version>1.5.0</xapool.version>
+    <ow2-util.version>1.0.30</ow2-util.version>
+  </properties>
+
+  <!-- Prefered dependencies version -->
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.ow2.spec.ee</groupId>
+        <artifactId>ow2-jta-1.1-spec</artifactId>
+        <version>${ow2.spec.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ow2.spec.ee</groupId>
+        <artifactId>ow2-connector-1.5-spec</artifactId>
+        <version>${ow2.spec.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ow2.carol</groupId>
+        <artifactId>carol</artifactId>
+        <version>${carol.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ow2.carol</groupId>
+        <artifactId>carol-interceptors</artifactId>
+        <version>${carol-interceptors.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ow2.carol</groupId>
+        <artifactId>carol-iiop-delegate</artifactId>
+        <version>${carol.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.objectweb.howl</groupId>
+        <artifactId>howl</artifactId>
+        <version>${howl.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.experlog</groupId>
+        <artifactId>xapool</artifactId>
+        <version>${xapool.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging-api</artifactId>
+        <version>${jcl.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-cli</groupId>
+        <artifactId>commons-cli</artifactId>
+        <version>${cli.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.14</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-corba_3.0_spec</artifactId>
+        <version>1.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.objectweb.joram</groupId>
+        <artifactId>joram-mom</artifactId>
+        <version>${joram.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.objectweb.joram</groupId>
+        <artifactId>joram-shared</artifactId>
+        <version>${joram.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.objectweb.joram</groupId>
+        <artifactId>joram-client</artifactId>
+        <version>${joram.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <scm>
+    <connection>scm:svn:svn://svn.forge.objectweb.org/svnroot/jotm/tags/JOTM_2_2_3</connection>
+    <developerConnection>scm:svn:svn+ssh://${maven.username}@svn.forge.objectweb.org/svnroot/jotm/tags/JOTM_2_2_3</developerConnection>
+    <url>http://svn.forge.objectweb.org/cgi-bin/viewcvs.cgi/jotm/tags/JOTM_2_2_3</url>
+  </scm>
+
+  <build>
+    <!-- In order to deploy on SSH repository -->
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0-beta-6</version>
+      </extension>
+    </extensions>
+    
+    <!-- Prefered dependencies version of plugins -->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2.1</version>
+          <configuration>
+            <!-- Use GNU Tar -->
+            <tarLongFileMode>gnu</tarLongFileMode>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.4.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.0</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-help-plugin</artifactId>
+          <version>2.1.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-one-plugin</artifactId>
+          <version>1.2</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>1.2</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-repository-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.0-beta-3</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.1.2</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.8.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>2.8.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-verifier-plugin</artifactId>
+          <version>1.0</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.1.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-artifact-plugin</artifactId>
+          <version>2.2-beta-1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.4</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <_include>-target/classes/META-INF/${project.artifactId}.bnd</_include>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <!-- Compile from 1.5 sources to 1.5 bytecode -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <inherited>true</inherited>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+
+      <!-- Javadoc aggregation -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <inherited>true</inherited>
+        <configuration>
+          <aggregate>true</aggregate>
+          <minmemory>128m</minmemory>
+          <maxmemory>256m</maxmemory>
+          <links>
+            <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+            <link>http://java.sun.com/javaee/5/docs/api/</link>
+          </links>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+    <defaultGoal>install</defaultGoal>
+
+  </build>
+
+  <modules>
+    <module>core</module>
+    <module>interceptors</module>
+    <module>standalone</module>
+    <module>jms</module>
+    <module>datasource</module>
+    <module>assemblies</module>
+  </modules>
+
+</project>

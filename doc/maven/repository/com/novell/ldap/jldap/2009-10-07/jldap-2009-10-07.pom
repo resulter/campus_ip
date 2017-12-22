@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.novell.ldap</groupId>
+  <artifactId>jldap</artifactId>
+  <version>2009-10-07</version>
+  <packaging>jar</packaging>
+  <name>LDAP Class Libraries for Java (JLDAP)</name>
+  <url>http://www.openldap.org/jldap/</url>
+  <description>The LDAP Class Libraries for Java (JLDAP) enable you to write applications to access, manage, update, and search for information stored in directories accessible using LDAPv3.</description>
+  <licenses>
+    <license>
+      <name>The OpenLDAP Public License</name>
+      <url>http://www.openldap.org/software/release/license.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>git://git.openldap.org/openldap-jldap.git</url>
+  </scm>
+  <developers>
+    <developer>
+      <organization>Novell</organization>
+      <organizationUrl>http://www.novell.com/developer/ndk/ldap_classes_for_java.html</organizationUrl>
+    </developer>
+    <developer>
+      <organization>OpenLDAP</organization>
+      <organizationUrl>http://www.openldap.org/jldap/</organizationUrl>
+    </developer>
+  </developers>
+</project> 

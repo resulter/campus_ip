@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <parent>
+    <artifactId>joram-parent</artifactId>
+    <groupId>org.objectweb.joram</groupId>
+    <version>5.0.9</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>joram-shared</artifactId>
+  <name>JORAM :: Shared</name>
+  <version>5.0.9</version>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-jms_1.1_spec</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta-regexp</groupId>
+      <artifactId>jakarta-regexp</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.objectweb.monolog</groupId>
+      <artifactId>monolog</artifactId>
+      <version>2.1.8</version>
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+    <status>deployed</status>
+  </distributionManagement>
+</project>

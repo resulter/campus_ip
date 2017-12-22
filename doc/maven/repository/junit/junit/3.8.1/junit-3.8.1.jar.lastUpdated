@@ -1,0 +1,6 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Oct 10 17:54:55 CST 2017
+http\://repo.maven.apache.org/maven2/.lastUpdated=1506655270476
+http\://192.168.10.222\:8082/nexus/content/groups/public/.lastUpdated=1507629295857
+@default-http\://maven.oschina.net/content/groups/public/.lastUpdated=1506655263751
+http\://maven.oschina.net/content/groups/public/.error=Could not transfer artifact junit\:junit\:jar\:3.8.1 from/to oschina-repos (http\://maven.oschina.net/content/groups/public)\: connect timed out

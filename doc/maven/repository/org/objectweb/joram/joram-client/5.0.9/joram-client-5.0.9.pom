@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <parent>
+    <artifactId>joram-parent</artifactId>
+    <groupId>org.objectweb.joram</groupId>
+    <version>5.0.9</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>joram-client</artifactId>
+  <name>JORAM :: Client</name>
+  <version>5.0.9</version>
+  <dependencies>
+    <dependency>
+      <groupId>org.objectweb.joram</groupId>
+      <artifactId>joram-shared</artifactId>
+      <version>5.0.9</version>
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+    <status>deployed</status>
+  </distributionManagement>
+</project>

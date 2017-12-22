@@ -1,0 +1,6 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Oct 10 17:52:01 CST 2017
+http\://repo.maven.apache.org/maven2/.lastUpdated=1506655105882
+http\://192.168.10.222\:8082/nexus/content/groups/public/.lastUpdated=1507629121247
+@default-http\://maven.oschina.net/content/groups/public/.lastUpdated=1506655105167
+http\://maven.oschina.net/content/groups/public/.error=Could not transfer artifact org.sonatype.spice\:spice-parent\:pom\:16 from/to oschina-repos (http\://maven.oschina.net/content/groups/public)\: connect timed out

@@ -1,0 +1,6 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Oct 10 17:52:00 CST 2017
+http\://repo.maven.apache.org/maven2/.lastUpdated=1506654512577
+http\://192.168.10.222\:8082/nexus/content/groups/public/.lastUpdated=1507629120874
+@default-http\://maven.oschina.net/content/groups/public/.lastUpdated=1506654511863
+http\://maven.oschina.net/content/groups/public/.error=Could not transfer artifact org.apache.maven.plugins\:maven-plugins\:pom\:22 from/to oschina-repos (http\://maven.oschina.net/content/groups/public)\: connect timed out

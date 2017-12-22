@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Mon Oct 16 11:19:51 CST 2017
+slf4j-log4j12-1.7.12.jar>=
+slf4j-log4j12-1.7.12.jar>mirrorId=
+slf4j-log4j12-1.7.12.pom>mirrorId=

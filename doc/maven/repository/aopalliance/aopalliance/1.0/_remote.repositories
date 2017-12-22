@@ -1,0 +1,6 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Mon Oct 16 11:19:51 CST 2017
+aopalliance-1.0.jar>=
+aopalliance-1.0.pom>central-repos=
+aopalliance-1.0.jar>mirrorId=
+aopalliance-1.0.pom>mirrorId=
