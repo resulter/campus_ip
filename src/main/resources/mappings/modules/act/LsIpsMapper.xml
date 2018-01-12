@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thinkgem.jeesite.modules.act.dao.LsIpsMapper" >
+  <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.act.entity.LsIps" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="office_id" property="officeId" jdbcType="INTEGER" />
+    <result column="network_address" property="networkAddress" jdbcType="VARCHAR" />
+    <result column="mask" property="mask" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, office_id, network_address, mask, ip, tag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIpsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_ips
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ls_ips
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ls_ips
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIpsExample" >
+    delete from ls_ips
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIps" >
+    insert into ls_ips (id, office_id, network_address, 
+      mask, ip, tag)
+    values (#{id,jdbcType=INTEGER}, #{officeId,jdbcType=INTEGER}, #{networkAddress,jdbcType=VARCHAR}, 
+      #{mask,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{tag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIps" >
+    insert into ls_ips
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="officeId != null" >
+        office_id,
+      </if>
+      <if test="networkAddress != null" >
+        network_address,
+      </if>
+      <if test="mask != null" >
+        mask,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="officeId != null" >
+        #{officeId,jdbcType=INTEGER},
+      </if>
+      <if test="networkAddress != null" >
+        #{networkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mask != null" >
+        #{mask,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIpsExample" resultType="java.lang.Integer" >
+    select count(*) from ls_ips
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ls_ips
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.officeId != null" >
+        office_id = #{record.officeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.networkAddress != null" >
+        network_address = #{record.networkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mask != null" >
+        mask = #{record.mask,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ls_ips
+    set id = #{record.id,jdbcType=INTEGER},
+      office_id = #{record.officeId,jdbcType=INTEGER},
+      network_address = #{record.networkAddress,jdbcType=VARCHAR},
+      mask = #{record.mask,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIps" >
+    update ls_ips
+    <set >
+      <if test="officeId != null" >
+        office_id = #{officeId,jdbcType=INTEGER},
+      </if>
+      <if test="networkAddress != null" >
+        network_address = #{networkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mask != null" >
+        mask = #{mask,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIps" >
+    update ls_ips
+    set office_id = #{officeId,jdbcType=INTEGER},
+      network_address = #{networkAddress,jdbcType=VARCHAR},
+      mask = #{mask,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

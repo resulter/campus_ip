@@ -24,10 +24,10 @@
 	</script>
 </head>
 <body>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/act/task/todo/">待办任务</a></li>
+	<ul class="nav nav-tabs"><li><a href="${ctx}/act/task/campus/">校区ip数据</a>
+		<%--<li class="active"><a href="${ctx}/act/task/todo/">待办任务</a></li>
 		<li><a href="${ctx}/act/task/historic/">已办任务</a></li>
-		<li><a href="${ctx}/act/task/process/">新建任务</a></li>
+		<li><a href="${ctx}/act/task/process/">新建任务</a></li>--%>
 	</ul>
 	<form:form id="searchForm" modelAttribute="act" action="${ctx}/act/task/todo/" method="get" class="breadcrumb form-search">
 		<div>

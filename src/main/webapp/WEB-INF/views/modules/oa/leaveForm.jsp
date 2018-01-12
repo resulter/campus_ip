@@ -26,7 +26,7 @@
 	</script>
 </head>
 <body>
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs"><li><a href="${ctx}/act/task/campus/">校区ip数据</a>
 		<li><a href="${ctx}/oa/leave/">待办任务</a></li>
 		<li><a href="${ctx}/oa/leave/list">所有任务</a></li>
 		<shiro:hasPermission name="oa:leave:edit"><li class="active"><a href="${ctx}/oa/leave/form">请假申请</a></li></shiro:hasPermission>

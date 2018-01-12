@@ -30,7 +30,7 @@
                 <property name="prettyPrint" value="false"/>
                 <property name="objectMapper">  
                     <bean class="com.thinkgem.jeesite.common.mapper.JsonMapper"></bean>  
-                </property> 
+                </property>
             </bean>
             <!-- 使用XML格式输出数据 -->
             <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thinkgem.jeesite.modules.act.dao.LsOfficeMapper" >
+  <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.act.entity.LsOffice" >
+    <id column="o_id" property="oId" jdbcType="INTEGER" />
+    <result column="o_name" property="oName" jdbcType="VARCHAR" />
+    <result column="d_ids" property="dIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    o_id, o_name, d_ids
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOfficeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_office
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ls_office
+    where o_id = #{oId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ls_office
+    where o_id = #{oId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOfficeExample" >
+    delete from ls_office
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOffice" >
+    insert into ls_office (o_id, o_name, d_ids
+      )
+    values (#{oId,jdbcType=INTEGER}, #{oName,jdbcType=VARCHAR}, #{dIds,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOffice" >
+    insert into ls_office
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        o_id,
+      </if>
+      <if test="oName != null" >
+        o_name,
+      </if>
+      <if test="dIds != null" >
+        d_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        #{oId,jdbcType=INTEGER},
+      </if>
+      <if test="oName != null" >
+        #{oName,jdbcType=VARCHAR},
+      </if>
+      <if test="dIds != null" >
+        #{dIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOfficeExample" resultType="java.lang.Integer" >
+    select count(*) from ls_office
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ls_office
+    <set >
+      <if test="record.oId != null" >
+        o_id = #{record.oId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oName != null" >
+        o_name = #{record.oName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dIds != null" >
+        d_ids = #{record.dIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ls_office
+    set o_id = #{record.oId,jdbcType=INTEGER},
+      o_name = #{record.oName,jdbcType=VARCHAR},
+      d_ids = #{record.dIds,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOffice" >
+    update ls_office
+    <set >
+      <if test="oName != null" >
+        o_name = #{oName,jdbcType=VARCHAR},
+      </if>
+      <if test="dIds != null" >
+        d_ids = #{dIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOffice" >
+    update ls_office
+    set o_name = #{oName,jdbcType=VARCHAR},
+      d_ids = #{dIds,jdbcType=VARCHAR}
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+</mapper>

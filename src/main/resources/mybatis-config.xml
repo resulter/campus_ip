@@ -47,6 +47,10 @@
 	<!-- 插件配置 -->
 	<plugins>
 		<plugin interceptor="com.thinkgem.jeesite.common.persistence.interceptor.PaginationInterceptor" />
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!--分页参数合理化  -->
+			<property name="reasonable" value="true"/>
+		</plugin>
     </plugins>
 	
 </configuration>
