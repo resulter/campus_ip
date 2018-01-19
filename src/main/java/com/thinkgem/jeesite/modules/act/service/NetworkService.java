@@ -1,6 +1,7 @@
 package com.thinkgem.jeesite.modules.act.service;
 
 
+import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.act.dao.LsAddressMapper;
 import com.thinkgem.jeesite.modules.act.dao.LsOfficeMapper;
 import com.thinkgem.jeesite.modules.act.entity.LsAddress;
@@ -19,6 +20,8 @@ public class NetworkService {
     @Autowired
     LsAddressMapper lsAddressMapper;
 
+
+
     /**
      * 查询所有网段
      *
@@ -30,8 +33,9 @@ public class NetworkService {
     }
 
     public LsAddress getData(Integer id) {
-        return  lsAddressMapper.selectByPrimaryKey(id);
+        return lsAddressMapper.selectByPrimaryKey(id);
     }
+
     /**
      * 网段保存
      *
@@ -41,11 +45,11 @@ public class NetworkService {
         // TODO Auto-generated method stub
         lsAddressMapper.insert(lsAddress);
     }
+
     public int saveDataGetId(LsAddress lsAddress) {
         // TODO Auto-generated method stub
-       return lsAddressMapper.insertAndGetId(lsAddress);
+        return lsAddressMapper.insertAndGetId(lsAddress);
     }
-
 
 
     /**
@@ -77,19 +81,47 @@ public class NetworkService {
     }
 
     /**
-     * 检验网段名是否可用
+     * 检验校区名是否可用
      *
      * @param name
-     * @return  true：代表当前姓名可用   fasle：不可用
+     * @return true：代表当前姓名可用   fasle：不可用
      */
-  /*  public boolean checkName(String name) {
+    public boolean checkName(String name) {
         // TODO Auto-generated method stub
-        LsOfficeExample example1 = new LsOfficeExample();
-        LsOfficeExample.Criteria criteria1 = example1.createCriteria();
-        criteria1.andONameEqualTo(name);
 
-        long count = lsOfficeMapper.countByExample(example1);
+        LsAddressExample example = new LsAddressExample();
+        LsAddressExample.Criteria criteria = example.createCriteria();
+        criteria.andNMinAddressEqualTo(name);
+        long count = lsAddressMapper.countByExample(example);
         return count == 0;
     }
-*/
+
+
+    public boolean checkNetwork(String name) {
+        List<LsAddress> list =lsAddressMapper.selectByExample(null);
+        boolean flag = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (StringUtils.substringBeforeLast(list.get(i).getnMaxAddress(),".").equals(name) && StringUtils.substringBeforeLast(list.get(i).getnMinAddress(),".").equals(name)) {
+                flag = true;
+                break;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 根据部门名称获取部门id
+     *
+     * @param name
+     * @return
+     */
+    public int getId(String name) {
+        LsAddressExample example = new LsAddressExample();
+        LsAddressExample.Criteria criteria = example.createCriteria();
+        criteria.andNMinAddressEqualTo(name);
+        return lsAddressMapper.selectByExample(example).get(0).getnId();
+    }
+
 }

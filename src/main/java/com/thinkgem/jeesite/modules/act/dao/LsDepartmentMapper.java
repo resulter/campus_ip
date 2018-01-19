@@ -17,6 +17,9 @@ public interface LsDepartmentMapper {
 
     int insert(LsDepartment record);
 
+    int insertAndGetId(LsDepartment record);
+
+
     int insertSelective(LsDepartment record);
 
     List<LsDepartment> selectByExample(LsDepartmentExample example);

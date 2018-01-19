@@ -3,6 +3,8 @@ package com.thinkgem.jeesite.modules.act.dao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.act.entity.LsEquipment;
 import com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample;
+import com.thinkgem.jeesite.modules.act.entity.SearchMapNew;
+import com.thinkgem.jeesite.modules.act.vo.LsEquipmentVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,9 +18,15 @@ public interface LsEquipmentMapper {
 
     int insert(LsEquipment record);
 
+    int insertAndGetId(LsEquipment record);
+
     int insertSelective(LsEquipment record);
 
     List<LsEquipment> selectByExample(LsEquipmentExample example);
+
+    List<LsEquipmentVo> selectBySearchMap(SearchMapNew searchMapNew);
+
+    List<LsEquipmentVo> selectBySearchMapForUserUtils(SearchMapNew searchMapNew);
 
     LsEquipment selectByPrimaryKey(Integer eId);
 

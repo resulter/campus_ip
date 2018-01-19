@@ -1,11 +1,11 @@
 @echo off
 rem /**
-rem  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+rem  * Copyright &copy; 2017-2019 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
 rem  *
 rem  * Author: ThinkGem@163.com
 rem  */
 echo.
-echo [ÐÅÏ¢] ´ò°ü¹¤³Ì£¬Éú³Éwar°üÎÄ¼þ¡£
+echo [ï¿½ï¿½Ï¢] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½warï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 echo.
 pause
 echo.

@@ -450,7 +450,7 @@
     //点击保存，保存员工。
     $("#emp_save_btn").click(function () {
 
-        var empName = $("#office_name_add_input").val();;
+       /* var empName = $("#office_name_add_input").val();;
         $.ajax({
             url: "${APP_PATH}/a/checkDepartments",
             data: "empName=" + empName,
@@ -465,7 +465,7 @@
                     return false;
                 }
             }
-        });
+        });*/
         //1、模态框中填写的表单数据提交给服务器进行保存
         if (!validate_add_form()) {
 //            alert("cuo");

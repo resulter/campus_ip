@@ -4,6 +4,7 @@ package com.thinkgem.jeesite.modules.act.service;
 import com.thinkgem.jeesite.modules.act.dao.BaseDataMapper;
 import com.thinkgem.jeesite.modules.act.dao.LsOfficeMapper;
 import com.thinkgem.jeesite.modules.act.entity.*;
+import com.thinkgem.jeesite.modules.sys.entity.Office;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,7 @@ public class OfficeSchoolService {
     }
 
     public LsOffice getData(Integer id) {
-        // TODO Auto-generated method stub
-        LsOffice lsOffice = lsOfficeMapper.selectByPrimaryKey(id);
-        return lsOffice;
+        return lsOfficeMapper.selectByPrimaryKey(id);
     }
     /**
      * 校区保存
@@ -41,6 +40,10 @@ public class OfficeSchoolService {
         // TODO Auto-generated method stub
         lsOfficeMapper.insert(lsOffice);
     }
+    public int saveDataGetId(LsOffice lsOffice) {
+        return lsOfficeMapper.insertAndGetId(lsOffice);
+    }
+
 
 
     /**
@@ -85,6 +88,18 @@ public class OfficeSchoolService {
 
         long count = lsOfficeMapper.countByExample(example1);
         return count == 0;
+    }
+
+    /**
+     * 根据部门名称获取部门id
+     * @param officeName
+     * @return
+     */
+    public int getId(String officeName ){
+        LsOfficeExample example = new LsOfficeExample();
+        LsOfficeExample.Criteria criteria = example.createCriteria();
+        criteria.andONameEqualTo(officeName);
+        return  lsOfficeMapper.selectByExample(example).get(0).getoId();
     }
 
 }

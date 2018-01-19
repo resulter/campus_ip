@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+ * Copyright &copy; 2017-2019 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
 package com.thinkgem.jeesite.modules.sys.entity;
 
@@ -23,6 +23,7 @@ public class Menu extends DataEntity<Menu> {
 	private static final long serialVersionUID = 1L;
 	private Menu parent;	// 父级菜单
 	private String parentIds; // 所有父级编号
+	private String parentId;//父级编号
 	private String name; 	// 名称
 	private String href; 	// 链接
 	private String target; 	// 目标（ mainFrame、_blank、_self、_parent、_top）
@@ -42,7 +43,39 @@ public class Menu extends DataEntity<Menu> {
 	public Menu(String id){
 		super(id);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Menu{" +
+				"parent=" + parent +
+				", parentIds='" + parentIds + '\'' +
+				", parentId='" + parentId + '\'' +
+				", name='" + name + '\'' +
+				", href='" + href + '\'' +
+				", target='" + target + '\'' +
+				", icon='" + icon + '\'' +
+				", sort=" + sort +
+				", isShow='" + isShow + '\'' +
+				", permission='" + permission + '\'' +
+				", userId='" + userId + '\'' +
+				", remarks='" + remarks + '\'' +
+				", createBy=" + createBy +
+				", createDate=" + createDate +
+				", updateBy=" + updateBy +
+				", updateDate=" + updateDate +
+				", delFlag='" + delFlag + '\'' +
+				", id='" + id + '\'' +
+				", currentUser=" + currentUser +
+				", page=" + page +
+				", sqlMap=" + sqlMap +
+				", isNewRecord=" + isNewRecord +
+				'}';
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
 	@JsonBackReference
 	@NotNull
 	public Menu getParent() {
@@ -164,8 +197,8 @@ public class Menu extends DataEntity<Menu> {
 		this.userId = userId;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return name;
-	}
+	}*/
 }

@@ -29,6 +29,10 @@ public class LsDepartment {
         this.dName = dName;
     }
 
+    public LsDepartment(String dName) {
+        this.dName = dName;
+    }
+
     @Override
     public String toString() {
         return "LsDepartment{" +

@@ -105,7 +105,7 @@
       #{tag,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertAndGetId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIp" useGeneratedKeys="true" keyProperty="userId" >
+  <insert id="insertAndGetId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsIp" useGeneratedKeys="true" keyProperty="iId" >
     insert into ls_ip (i_id, ip, n_id,
     tag)
     values (#{iId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{nId,jdbcType=VARCHAR},

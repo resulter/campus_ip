@@ -2,6 +2,7 @@ package com.thinkgem.jeesite.modules.act.web;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.act.dao.Msg;
 import com.thinkgem.jeesite.modules.act.entity.BaseData;
@@ -12,6 +13,9 @@ import com.thinkgem.jeesite.modules.act.service.ExportService;
 import com.thinkgem.jeesite.modules.act.service.OfficeSchoolService;
 import com.thinkgem.jeesite.modules.act.utils.ImportExcelUtil;
 import com.thinkgem.jeesite.modules.act.utils.POIUtil;
+import com.thinkgem.jeesite.modules.sys.entity.Menu;
+import com.thinkgem.jeesite.modules.sys.service.SystemService;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +51,9 @@ public class OfficeSchoolController {
     OfficeSchoolService officeSchoolService;
     @Autowired
     DepartmentService departmentService;
+
+    @Autowired
+    private SystemService systemService;
 
     /**
      * 页面跳转专用
@@ -76,13 +84,14 @@ public class OfficeSchoolController {
                 String[] dep = data.get(i).getdIds().split(",");
                 int[] deps = new int[dep.length];
                 for (int j = 0; j < dep.length; j++) {
-                    if(dep[j]!= null&&!dep[j].equals("null")) {
-                        deps[j] = Integer.parseInt(dep[j]);
-                        depName += departmentService.getData(deps[j]).getdName() + ",";
-
+                    System.out.println("dep啊啊啊" + departmentService.getData(Integer.parseInt(dep[j])));
+                    if (departmentService.getData(Integer.parseInt(dep[j])) != null && !"".equals(departmentService.getData(Integer.parseInt(dep[j])))) {
+                        depName += departmentService.getData(Integer.parseInt(dep[j])).getdName() + ",";
                     }
+
                 }
                 depName = depName.substring(0, depName.length() - 1);
+                System.out.println("字符串 " + depName + "   "  + data.get(i).getdIds());
                 data.get(i).setdIds(depName);
             }
         }
@@ -121,26 +130,30 @@ public class OfficeSchoolController {
             }
             return Msg.fail().add("errorFields", map);
         } else {
-            officeSchoolService.saveData(lsOffice);
-            return Msg.success();
+//            officeSchoolService.saveData(lsOffice);
+            officeSchoolService.saveDataGetId(lsOffice);
+            int oId = lsOffice.getoId();
+            System.out.println("啊啊啊啊啊啊啊啊啊" + oId);
+            return Msg.success().add("oId",oId);
         }
     }
 
     /**
-插入部门
+     * 插入部门
+     *
      * @return
      */
     //update
     @ResponseBody
     @RequestMapping(value = "/depOfOffice/{oId}", method = RequestMethod.PUT)
-    public Msg saveDep(LsOffice lsOffice ,String dId, HttpServletRequest request) {
-        System.out.println("lsOffice    --- >   " + lsOffice +"   id  " + dId);
+    public Msg saveDep(LsOffice lsOffice, String dId, HttpServletRequest request) {
+        System.out.println("lsOffice    --- >   " + lsOffice + "   id  " + dId);
         LsOffice result = officeSchoolService.getData(lsOffice.getoId());
         System.out.println("lsOffice    --- >   " + request);
-        if("".equals(result.getdIds())||result.getdIds() == null){
+        if ("".equals(result.getdIds()) || result.getdIds() == null) {
             result.setdIds(dId);
-        }else {
-            if(dId!= null) {
+        } else {
+            if (dId != null) {
                 result.setdIds(result.getdIds() + "," + dId);
             }
         }
@@ -148,15 +161,16 @@ public class OfficeSchoolController {
         return Msg.success();
     }
 
-      /**
-插入部门
+    /**
+     * 插入部门
+     *
      * @return
      */
     //update
     @ResponseBody
     @RequestMapping(value = "/delDepOfOffice/{oId}", method = RequestMethod.PUT)
-    public Msg delDep(LsOffice lsOffice ,String dId, HttpServletRequest request) {
-        System.out.println("lsOffice    --- >   " + lsOffice +"   id  " + dId);
+    public Msg delDep(LsOffice lsOffice, String dId, HttpServletRequest request) {
+        System.out.println("lsOffice    --- >   " + lsOffice + "   id  " + dId);
         LsOffice result = officeSchoolService.getData(lsOffice.getoId());
         System.out.println("lsOffice    --- >   " + request);
 
@@ -164,14 +178,14 @@ public class OfficeSchoolController {
         String[] str_emps = ids.split(",");
         String depResult = "";
         for (int i = 0; i < str_emps.length; i++) {
-            if(!str_emps[i].equals(dId)){
+            if (!str_emps[i].equals(dId)) {
                 depResult += str_emps[i] + ",";
             }
         }
-        if(depResult.length() >1) {
+        if (depResult.length() > 1) {
             depResult = depResult.substring(0, depResult.length() - 1);
             result.setdIds(depResult);
-        }else {
+        } else {
             result.setdIds("");
         }
 
@@ -248,5 +262,17 @@ public class OfficeSchoolController {
         } else {
             return Msg.fail().add("va_msg", "该校区名已存在");
         }
+    }
+
+
+    @RequestMapping(value = "updateMenu")
+    public String updateSort(String[] ids, Integer[] sorts, RedirectAttributes redirectAttributes) {
+        List<Menu> menuList = UserUtils.getMenuList();
+        for (int i = 0; i < ids.length; i++) {
+            Menu menu = new Menu(ids[i]);
+            menu.setSort(sorts[i]);
+            systemService.updateMenuSort(menu);
+        }
+        return "redirect:/a/sys/menu/";
     }
 }

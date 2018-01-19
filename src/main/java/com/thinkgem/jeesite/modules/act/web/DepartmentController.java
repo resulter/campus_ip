@@ -6,6 +6,7 @@ import com.thinkgem.jeesite.modules.act.dao.Msg;
 import com.thinkgem.jeesite.modules.act.entity.LsDepartment;
 import com.thinkgem.jeesite.modules.act.entity.LsOffice;
 import com.thinkgem.jeesite.modules.act.service.DepartmentService;
+import com.thinkgem.jeesite.modules.act.service.IpService;
 import com.thinkgem.jeesite.modules.act.service.OfficeSchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,8 @@ public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    IpService service;
 
     /**
      * 页面跳转专用

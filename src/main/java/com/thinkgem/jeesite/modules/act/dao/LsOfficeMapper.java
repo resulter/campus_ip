@@ -17,6 +17,8 @@ public interface LsOfficeMapper {
 
     int insert(LsOffice record);
 
+    int insertAndGetId(LsOffice record);
+
     int insertSelective(LsOffice record);
 
     List<LsOffice> selectByExample(LsOfficeExample example);

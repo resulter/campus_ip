@@ -42,7 +42,6 @@
     </style>
 </head>
 <body>
-network
 <!-- 员工修改的模态框 -->
 <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -598,7 +597,7 @@ network
                 var myData = result.extend.das;
 
 
-                alert(myData.oId);
+//                alert(myData.oId);
                 $("#min_ip_update_input").val(myData.nMinAddress);
                 $("#max_ip_update_input").val(myData.nMaxAddress);
                 $("#mask_update_input").val(myData.mask);
@@ -648,7 +647,7 @@ network
         var id = $(this).parents("tr").find("td:eq(1)").text();
         var office = $(this).parents("tr").find("td:eq(2)").text();
         var oId = $(this).attr("del-id");
-        alert(id);
+//        alert(id);
 //        alert($(this).parents("tr").find("td:eq(1)").text());
         if (confirm("确认删除【" + office + "】的数据吗？")) {
             //确认，发送ajax请求删除即可

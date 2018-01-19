@@ -120,26 +120,7 @@
 							<span class="help-block"></span>
 						</div>
 					</div>
-					<%--   <div class="form-group">
-                           <label class="col-sm-3 control-label">gender</label>
-                           <div class="col-sm-8">
-                               <label class="radio-inline">
-                                   <input type="radio" name="gender" id="gender1_update_input" value="M" checked="checked">
-                                   男
-                               </label>
-                               <label class="radio-inline">
-                                   <input type="radio" name="gender" id="gender2_update_input" value="F"> 女
-                               </label>
-                           </div>
-                       </div>
-                       <div class="form-group">
-                           <label class="col-sm-3 control-label">deptName</label>
-                           <div class="col-sm-4">
-                               <!-- 部门提交部门id即可 -->
-                               <select class="form-control" name="dId">
-                               </select>
-                           </div>
-                       </div>--%>
+
 				</form>
 			</div>
 			<div class="modal-footer">

@@ -10,7 +10,7 @@
 	
 	<name>JeeSite</name>
 	<url>http://thinkgem.github.com/jeesite</url>
-	<inceptionYear>2012-2014</inceptionYear>
+	<inceptionYear>2017-2019</inceptionYear>
 	
 	<!-- 项目属性 -->
 	<properties>
@@ -283,12 +283,15 @@
 			<version>${mysql.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>${oracle.driver.version}</version>
-			<scope>runtime</scope>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.1.0.7.0</version>
+			<scope>test</scope>
 		</dependency>
+
+
 		<dependency>
 			<groupId>net.sourceforge.jtds</groupId>
 			<artifactId>jtds</artifactId>

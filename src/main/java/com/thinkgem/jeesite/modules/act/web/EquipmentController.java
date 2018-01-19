@@ -45,6 +45,7 @@ public class EquipmentController {
 
     /**
      * 页面跳转专用
+     *
      * @param pn
      * @return
      */
@@ -65,6 +66,9 @@ public class EquipmentController {
         // 在查询之前只需要调用，传入页码，以及每页的大小
         PageHelper.startPage(pn, 10);
         // startPage后面紧跟的这个查询就是一个分页查询
+        List<LsEquipmentVo> data = equipmentService.getVoAll("","","","");
+       /*
+        mybatis  pagehelper分页插件只对PageHelper.startPage后的第一条查询起作用，后更改数据则不能正常切换页码，只能修改sql语句
         List<LsEquipment> data = equipmentService.getAll();
         List<LsEquipmentVo> result = new ArrayList<LsEquipmentVo>();
         System.out.println("data库长度" + data.size());
@@ -93,7 +97,7 @@ public class EquipmentController {
             String mask = lsAddress.getMask();
             String maxAddress = lsAddress.getnMaxAddress();
             String minAddress = lsAddress.getnMinAddress();
-            String address = StringUtils.substringBeforeLast(minAddress,".") + "." + "0";
+            String address = StringUtils.substringBeforeLast(minAddress, ".") + "." + "0";
             String oId = lsAddress.getoId();
 
             LsOffice lsOffice = officeSchoolService.getData(Integer.parseInt(oId));
@@ -101,15 +105,129 @@ public class EquipmentController {
             String oName = lsOffice.getoName();
 
 
-            result.add(new LsEquipmentVo(eId,iId,oName,oId,address,minAddress,maxAddress,mask,nId,ip,tag,dId,dName,equipmentName,location,username,password,remark));
+            result.add(new LsEquipmentVo(eId, iId, oName, oId, address, minAddress, maxAddress, mask, nId, ip, tag, dId, dName, equipmentName, location, username, password, remark));
             System.out.println("data数据  ：" + result.get(i));
-        }
-        System.out.println("----------------------> 库长度size" + result.size());
+        }*/
+        System.out.println("----------------------> 库长度size" + data.size());
         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
         // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
-        PageInfo page = new PageInfo(result, 5);
+        PageInfo page = new PageInfo(data, 5);
         System.out.println("----------->>" + page.toString());
         return Msg.success().add("pageInfo", page);
+    }
+
+    @RequestMapping(value = "/equipment", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg add(@RequestParam(value = "dd", defaultValue = "ddd") String dd, LsEquipmentVo lsEquipmentVo, BindingResult result) {
+        System.out.println("lsEquipmentVo数据" + lsEquipmentVo);
+        if (result.hasErrors()) {
+            //校验失败，应该返回失败，在模态框中显示校验失败的错误信息
+            Map<String, Object> map = new HashMap();
+            List<FieldError> errors = result.getFieldErrors();
+            for (FieldError fieldError : errors) {
+                System.out.println("错误的字段名：" + fieldError.getField());
+                System.out.println("错误信息：" + fieldError.getDefaultMessage());
+                map.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return Msg.fail().add("errorFields", map);
+        } else {
+            LsIp lsIp = ipService.getData(Integer.parseInt(lsEquipmentVo.getiId()));
+            lsIp.setTag("1");
+//            ipService.saveData(lsIp);
+            ipService.updateData(lsIp);
+            equipmentService.saveData(new LsEquipment(lsEquipmentVo.getiId(), lsEquipmentVo.getdId(), lsEquipmentVo.getEquipmentName(), lsEquipmentVo.getLocation(), lsEquipmentVo.getUsername(), lsEquipmentVo.getPassword(), lsEquipmentVo.getRemark()));
+//            departmentService.saveData(lsDepartment);
+            return Msg.success();
+        }
+    }
+
+    /**
+     * 根据ID查询信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getData(@PathVariable("id") Integer id) {
+//		System.out.println("------------------------>" + baseDataService.getData(id).getCampusName());
+
+        LsEquipment lsEquipment = equipmentService.getData(id);
+        LsEquipmentVo lsEquipmentVo = new LsEquipmentVo();
+        if (lsEquipment != null) {
+            String dId = lsEquipment.getdId();
+            Integer eId = lsEquipment.geteId();
+            String equipmentName = lsEquipment.getEquipmentName();
+            String iId = lsEquipment.getiId();
+            String location = lsEquipment.getLocation();
+            String password = lsEquipment.getPassword();
+            String remark = lsEquipment.getRemark();
+            String username = lsEquipment.getUsername();
+
+            LsDepartment lsDepartment = departmentService.getData(Integer.parseInt(dId));
+            String dName = lsDepartment.getdName();
+
+            LsIp lsIp = ipService.getData(Integer.parseInt(iId));
+            String ip = lsIp.getIp();
+            String nId = lsIp.getnId();
+            String tag = lsIp.getTag();
+
+            LsAddress lsAddress = networkService.getData(Integer.parseInt(nId));
+            String mask = lsAddress.getMask();
+            String maxAddress = lsAddress.getnMaxAddress();
+            String minAddress = lsAddress.getnMinAddress();
+            String address = StringUtils.substringBeforeLast(minAddress, ".") + "." + "0";
+            String oId = lsAddress.getoId();
+
+            LsOffice lsOffice = officeSchoolService.getData(Integer.parseInt(oId));
+            String dIds = lsOffice.getdIds();
+            String oName = lsOffice.getoName();
+
+
+            LsEquipmentVo result = new LsEquipmentVo(eId, iId, oName, oId, address, minAddress, maxAddress, mask, nId, ip, tag, dId, dName, equipmentName, location, username, password, remark);
+            return Msg.success().add("equipmentVo", result);
+        } else {
+            return Msg.fail().add("equipmentVo", null);
+        }
+    }
+
+    //update
+    @ResponseBody
+    @RequestMapping(value = "/equipment/{eId}", method = RequestMethod.PUT)
+    public Msg saveData(LsEquipmentVo lsEquipmentVo, HttpServletRequest request) {
+        System.out.println("lsOffice    --- >   " + lsEquipmentVo);
+
+        LsEquipment lsEquipment = new LsEquipment(lsEquipmentVo.geteId(),lsEquipmentVo.getiId(), lsEquipmentVo.getdId(), lsEquipmentVo.getEquipmentName(), lsEquipmentVo.getLocation(), lsEquipmentVo.getUsername(), lsEquipmentVo.getPassword(), lsEquipmentVo.getRemark());
+        equipmentService.updateData(lsEquipment);
+        return Msg.success();
+    }
+
+    /**
+     * 单个批量二合一
+     * 批量删除：1-2-3
+     * 单个删除：1
+     *
+     * @param
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/equipment/{ids}", method = RequestMethod.DELETE)
+    public Msg deleteData(@PathVariable("ids") String ids) {
+        System.out.println("删除id   -------> " + ids);
+        //批量删除
+        if (ids.contains("-")) {
+            List<Integer> del_ids = new ArrayList();
+            String[] str_ids = ids.split("-");
+            //组装id的集合
+            for (String string : str_ids) {
+                del_ids.add(Integer.parseInt(string));
+            }
+            equipmentService.deleteBatch(del_ids);
+        } else {
+            Integer id = Integer.parseInt(ids);
+            equipmentService.deleteData(id);
+        }
+        return Msg.success();
     }
     /*
     *//**
@@ -155,25 +273,7 @@ public class EquipmentController {
     }
 
 
-    @RequestMapping(value = "/department", method = RequestMethod.POST)
-    @ResponseBody
-    public Msg add(@RequestParam(value = "dd", defaultValue = "ddd") String dd, LsDepartment lsDepartment, BindingResult result) {
-        System.out.println("数据" + lsDepartment);
-        if (result.hasErrors()) {
-            //校验失败，应该返回失败，在模态框中显示校验失败的错误信息
-            Map<String, Object> map = new HashMap();
-            List<FieldError> errors = result.getFieldErrors();
-            for (FieldError fieldError : errors) {
-                System.out.println("错误的字段名：" + fieldError.getField());
-                System.out.println("错误信息：" + fieldError.getDefaultMessage());
-                map.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
-            return Msg.fail().add("errorFields", map);
-        } else {
-            departmentService.saveData(lsDepartment);
-            return Msg.success();
-        }
-    }
+
 
     *//**
      * 根据id查询
@@ -181,22 +281,9 @@ public class EquipmentController {
      * @param id
      * @return
      *//*
-    @RequestMapping(value = "/department/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Msg getData(@PathVariable("id") Integer id) {
-//		System.out.println("------------------------>" + baseDataService.getData(id).getCampusName());
-        LsDepartment lsDepartment = departmentService.getData(id);
-        return Msg.success().add("das", lsDepartment);
-    }
 
-    //update
-    @ResponseBody
-    @RequestMapping(value = "/department/{dId}", method = RequestMethod.PUT)
-    public Msg saveData(LsDepartment lsDepartment, HttpServletRequest request) {
-        System.out.println("lsOffice    --- >   " + lsDepartment);
-        departmentService.updateData(lsDepartment);
-        return Msg.success();
-    }
+
+
 
     *//**
      * 单个批量二合一
@@ -245,4 +332,32 @@ public class EquipmentController {
             return Msg.fail().add("va_msg", "该部门名已存在");
         }
     }*/
+
+    /**
+     * 返回查询条件集合
+     *
+     * @param request
+     * @return
+     */
+    private Map<String, String> getSearchMap(HttpServletRequest request) {
+        Map<String, String> searchMap = new HashMap<String, String>();
+        //校区名称
+        String ip_search_input = request.getParameter("ip_search_input");
+        if (ip_search_input != null) {ip_search_input = ip_search_input.trim();}
+        ip_search_input = ip_search_input != null ? ip_search_input : "";
+        searchMap.put("ip_search_input", ip_search_input);
+        //校区名称
+        String equipment_search_input = request.getParameter("equipment_search_input");
+        if (equipment_search_input != null) {equipment_search_input = equipment_search_input.trim();}
+        equipment_search_input = equipment_search_input != null ? equipment_search_input : "";
+        searchMap.put("equipment_search_input", equipment_search_input);
+        //校区名称
+        String address_search_select = request.getParameter("address_search_select");
+        if (address_search_select != null) {address_search_select = address_search_select.trim();}
+        address_search_select = address_search_select != null ? address_search_select : "";
+        searchMap.put("address_search_select", address_search_select);
+
+        return searchMap;
+    }
+
 }

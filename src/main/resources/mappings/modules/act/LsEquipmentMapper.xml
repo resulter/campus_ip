@@ -1,108 +1,174 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.thinkgem.jeesite.modules.act.dao.LsEquipmentMapper" >
-  <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.act.entity.LsEquipment" >
-    <id column="e_id" property="eId" jdbcType="INTEGER" />
-    <result column="i_id" property="iId" jdbcType="VARCHAR" />
-    <result column="d_id" property="dId" jdbcType="VARCHAR" />
-    <result column="equipment_name" property="equipmentName" jdbcType="VARCHAR" />
-    <result column="location" property="location" jdbcType="VARCHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.thinkgem.jeesite.modules.act.dao.LsEquipmentMapper">
+    <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.act.entity.LsEquipment">
+        <id column="e_id" property="eId" jdbcType="INTEGER"/>
+        <result column="i_id" property="iId" jdbcType="VARCHAR"/>
+        <result column="d_id" property="dId" jdbcType="VARCHAR"/>
+        <result column="equipment_name" property="equipmentName" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ResultSearchMap" type="com.thinkgem.jeesite.modules.act.vo.LsEquipmentVo">
+        <id column="e_id" property="eId" jdbcType="INTEGER"/>
+        <result column="i_id" property="iId" jdbcType="VARCHAR"/>
+        <result column="d_id" property="dId" jdbcType="VARCHAR"/>
+        <result column="n_id" property="nId" jdbcType="VARCHAR"/>
+        <result column="d_id" property="dId" jdbcType="VARCHAR"/>
+        <result column="o_name" property="officeName" jdbcType="VARCHAR"/>
+        <result column="n_min_address" property="address" jdbcType="VARCHAR"/>
+        <result column="n_min_address" property="minAddress" jdbcType="VARCHAR"/>
+        <result column="n_max_address" property="maxAddress" jdbcType="VARCHAR"/>
+        <result column="equipment_name" property="equipmentName" jdbcType="VARCHAR"/>
+        <result column="mask" property="mask" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="tag" property="ipTag" jdbcType="VARCHAR"/>
+        <result column="d_name" property="department" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     e_id, i_id, d_id, equipment_name, location, username, password, remark
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from ls_equipment
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from ls_equipment
-    where e_id = #{eId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <sql id="Base_Column_List_search">
+    e.e_id, i.i_id, d.d_id, equipment_name, location, username, password, remark,o_name,n_min_address,n_max_address,mask,ip,d_name,i.tag
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from ls_equipment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectBySearchMap" resultMap="ResultSearchMap"
+            parameterType="com.thinkgem.jeesite.modules.act.entity.SearchMapNew">
+        select
+        <include refid="Base_Column_List_search"/>
+        from ls_equipment e JOIN ls_department d ON d.d_id=CONVERT(e.d_id,SIGNED)
+        join ls_ip i on i.i_id=CONVERT(e.i_id,SIGNED)
+        JOIN ls_address n on n.n_id=CONVERT(i.n_id,SIGNED)
+        JOIN ls_office o on o.o_id=CONVERT(n.o_id,SIGNED) WHERE
+        <if test='officeId!="%null%"'>n.o_id like CONCAT(CONCAT('%',#{officeId}), '%')</if>
+        <!--<choose>
+          <when test='search_address!="%null%" and search_address!="全部网段"'>and substring_index(n.n_min_address,'.',3) like CONCAT(CONCAT('%', #{search_address}), '%')</when>
+          <when test='search_address=="%全部网段%"'></when>
+        </choose>-->
+        <if test='search_address!="%null%" and search_address!="全部网段"'>and n.n_min_address like CONCAT(CONCAT('%',
+            #{search_address}), '%')
+        </if>
+        <if test='search_ip!="%null%"'>and i.ip like CONCAT(CONCAT('%', #{search_ip}), '%')</if>
+        <if test='search_equipment!="%null%"'>and e.equipment_name like CONCAT(CONCAT('%', #{search_equipment}), '%')
+        </if>
+    </select>
+
+    <select id="selectBySearchMapForUserUtils" resultMap="ResultSearchMap"
+            parameterType="com.thinkgem.jeesite.modules.act.entity.SearchMapNew">
+        select
+        <include refid="Base_Column_List_search"/>
+        from ls_ip i left join ls_equipment e on i.i_id=CONVERT(e.i_id,SIGNED)
+        left JOIN ls_department d ON d.d_id=CONVERT(e.d_id,SIGNED)
+        left JOIN ls_address n on n.n_id=CONVERT(i.n_id,SIGNED)
+        left JOIN ls_office o on o.o_id=CONVERT(n.o_id,SIGNED) WHERE
+        <if test='officeId!="%null%"'>n.o_id =#{officeId}</if>
+
+        <if test='search_address!="%null%" and search_address!="全部网段"'>and n.n_min_address like CONCAT(CONCAT('%',
+            #{search_address}), '%')
+        </if>
+        <if test='search_ip!="%null%"'>and i.ip like CONCAT(CONCAT('%', #{search_ip}), '%')</if>
+        <if test='search_equipment!=""'>and e.equipment_name like CONCAT(CONCAT('%', #{search_equipment}), '%')
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from ls_equipment
+        where e_id = #{eId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from ls_equipment
     where e_id = #{eId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample" >
-    delete from ls_equipment
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment" >
+    <delete id="deleteByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample">
+        delete from ls_equipment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment">
     insert into ls_equipment (e_id, i_id, d_id, 
       equipment_name, location, username, 
       password, remark)
@@ -110,141 +176,152 @@
       #{equipmentName,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment" >
-    insert into ls_equipment
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="eId != null" >
-        e_id,
-      </if>
-      <if test="iId != null" >
-        i_id,
-      </if>
-      <if test="dId != null" >
-        d_id,
-      </if>
-      <if test="equipmentName != null" >
-        equipment_name,
-      </if>
-      <if test="location != null" >
-        location,
-      </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="remark != null" >
-        remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="eId != null" >
-        #{eId,jdbcType=INTEGER},
-      </if>
-      <if test="iId != null" >
-        #{iId,jdbcType=VARCHAR},
-      </if>
-      <if test="dId != null" >
-        #{dId,jdbcType=VARCHAR},
-      </if>
-      <if test="equipmentName != null" >
-        #{equipmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="location != null" >
-        #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-    </trim>
+    <insert id="insertAndGetId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment"
+            useGeneratedKeys="true" keyProperty="userId">
+    insert into ls_equipment (e_id, i_id, d_id,
+      equipment_name, location, username,
+      password, remark)
+    values (#{eId,jdbcType=INTEGER}, #{iId,jdbcType=VARCHAR}, #{dId,jdbcType=VARCHAR},
+      #{equipmentName,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
-  <select id="countByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample" resultType="java.lang.Integer" >
-    select count(*) from ls_equipment
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update ls_equipment
-    <set >
-      <if test="record.eId != null" >
-        e_id = #{record.eId,jdbcType=INTEGER},
-      </if>
-      <if test="record.iId != null" >
+
+    <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment">
+        insert into ls_equipment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eId != null">
+                e_id,
+            </if>
+            <if test="iId != null">
+                i_id,
+            </if>
+            <if test="dId != null">
+                d_id,
+            </if>
+            <if test="equipmentName != null">
+                equipment_name,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eId != null">
+                #{eId,jdbcType=INTEGER},
+            </if>
+            <if test="iId != null">
+                #{iId,jdbcType=VARCHAR},
+            </if>
+            <if test="dId != null">
+                #{dId,jdbcType=VARCHAR},
+            </if>
+            <if test="equipmentName != null">
+                #{equipmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipmentExample"
+            resultType="java.lang.Integer">
+        select count(*) from ls_equipment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update ls_equipment
+        <set>
+            <if test="record.eId != null">
+                e_id = #{record.eId,jdbcType=INTEGER},
+            </if>
+            <if test="record.iId != null">
+                i_id = #{record.iId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dId != null">
+                d_id = #{record.dId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.equipmentName != null">
+                equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.location != null">
+                location = #{record.location,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update ls_equipment
+        set e_id = #{record.eId,jdbcType=INTEGER},
         i_id = #{record.iId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dId != null" >
         d_id = #{record.dId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.equipmentName != null" >
         equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.location != null" >
         location = #{record.location,jdbcType=VARCHAR},
-      </if>
-      <if test="record.username != null" >
         username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark != null" >
-        remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update ls_equipment
-    set e_id = #{record.eId,jdbcType=INTEGER},
-      i_id = #{record.iId,jdbcType=VARCHAR},
-      d_id = #{record.dId,jdbcType=VARCHAR},
-      equipment_name = #{record.equipmentName,jdbcType=VARCHAR},
-      location = #{record.location,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment" >
-    update ls_equipment
-    <set >
-      <if test="iId != null" >
-        i_id = #{iId,jdbcType=VARCHAR},
-      </if>
-      <if test="dId != null" >
-        d_id = #{dId,jdbcType=VARCHAR},
-      </if>
-      <if test="equipmentName != null" >
-        equipment_name = #{equipmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="location != null" >
-        location = #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where e_id = #{eId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment" >
+        remark = #{record.remark,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment">
+        update ls_equipment
+        <set>
+            <if test="iId != null">
+                i_id = #{iId,jdbcType=VARCHAR},
+            </if>
+            <if test="dId != null">
+                d_id = #{dId,jdbcType=VARCHAR},
+            </if>
+            <if test="equipmentName != null">
+                equipment_name = #{equipmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where e_id = #{eId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment">
     update ls_equipment
     set i_id = #{iId,jdbcType=VARCHAR},
       d_id = #{dId,jdbcType=VARCHAR},

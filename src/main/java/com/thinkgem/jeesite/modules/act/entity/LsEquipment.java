@@ -20,6 +20,17 @@ public class LsEquipment {
     public LsEquipment() {
     }
 
+    public LsEquipment(Integer eId, String iId, String dId, String equipmentName, String location, String username, String password, String remark) {
+        this.eId = eId;
+        this.iId = iId;
+        this.dId = dId;
+        this.equipmentName = equipmentName;
+        this.location = location;
+        this.username = username;
+        this.password = password;
+        this.remark = remark;
+    }
+
     public LsEquipment(String iId, String dId, String equipmentName, String location, String username, String password, String remark) {
         this.iId = iId;
         this.dId = dId;

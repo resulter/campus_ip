@@ -105,8 +105,10 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <form action="${APP_PATH}/sys/menu/updateSort">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" id="emp_save_btn">添加</button>
+                </form>
             </div>
         </div>
     </div>
@@ -200,7 +202,7 @@
                     <th style="width: 140px">id</th>
                     <th style="width: 150px">校区名字</th>
                     <th style="width: 200px">包含部门</th>
-                    <th style="width: 300px">操作</th>
+                    <th style="width: 350px;min-width: 350px">操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -222,10 +224,21 @@
 
 </div>
 <%--<input type="hidden" id="corp_id" name="corp_id" value="${}" />--%>
+<%--<script type="text/javascript" src="/static/jerichotab/js/jquery.jerichotab.js"></script>--%>
 <script type="text/javascript">
     var totalRecord, currentPage;
     //1、页面加载完成以后，直接去发送ajax请求,要到分页数据
     $(function () {
+//        var tabTitleHeight = 33; // 页签的高度
+//        //  初始化页签
+//        $.fn.initJerichoTab({
+//            renderTo: '#right', uniqueId: 'jerichotab',
+//            contentCss: { 'height': $('#right').height() - tabTitleHeight },
+//            tabs: [], loadOnce: true, tabWidth: 110, titleHeight: tabTitleHeight
+//        });//
+//        function openCloseClickCallBack(b){
+//            $.fn.jerichoTab.resize();
+//        } //
         //去首页
         to_page(1);
     });
@@ -576,8 +589,20 @@
             type: "POST",
             data: $("#empAddModal form").serialize(),
             success: function (result) {
+
                 //alert(result.msg);
                 if (result.code == 100) {
+                    var $new = $('<li><a data-href=".menu3-" href="/a/officeDetail?officeId='+result.extend.oId+'" target="mainFrame"><i class="icon-tasks"></i>&nbsp;'+$("#office_name_add_input").val()+'</a><ul class="nav nav-list hide" style="margin:0;padding-right:0;">""</ul></li>');
+                    $new.find('a').click(function(){
+                        var href = $(this).attr("data-href");
+                        if($(href).length > 0){
+                            $(href).toggle().parent().toggle();
+                            return false;
+                        }
+                        //  打开显示页签
+                        return parent.addTab($(this)); //
+                    });
+                    window.parent.$("#collapse-94 .accordion-inner .ul_add_li").append($new);
                     //员工保存成功；
                     //1、关闭模态框
                     $("#empAddModal").modal('hide');
@@ -600,8 +625,23 @@
                 }
             }
         });
-    });
 
+    });
+    //  添加一个页签
+    function addTab($this, refresh){
+        $(".jericho_tab").show();
+        $("#mainFrame").hide();
+        $.fn.jerichoTab.addTab({
+            tabFirer: $this,
+            title: $this.text(),
+            closeable: true,
+            data: {
+                dataType: 'iframe',
+                dataLink: $this.attr('href')
+            }
+        }).loadData(refresh);
+        return false;
+    }//
     //添加一个部门。
     $("#dep_save_btn").click(function () {
         //2、发送ajax请求保存员工

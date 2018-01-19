@@ -103,6 +103,13 @@
     values (#{oId,jdbcType=INTEGER}, #{oName,jdbcType=VARCHAR}, #{dIds,jdbcType=VARCHAR}
       )
   </insert>
+   <insert id="insertAndGetId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOffice" useGeneratedKeys="true" keyProperty="oId">
+    insert into ls_office (o_id, o_name, d_ids
+      )
+    values (#{oId,jdbcType=INTEGER}, #{oName,jdbcType=VARCHAR}, #{dIds,jdbcType=VARCHAR}
+      )
+  </insert>
+
   <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsOffice" >
     insert into ls_office
     <trim prefix="(" suffix=")" suffixOverrides="," >

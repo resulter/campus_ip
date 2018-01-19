@@ -58,7 +58,15 @@ public class NetworkController {
         // startPage后面紧跟的这个查询就是一个分页查询
         List<LsAddress> data = networkService.getAll();
         for (int i = 0; i < data.size(); i++) {
-            data.get(i).setoId(officeSchoolService.getData(Integer.parseInt(data.get(i).getoId())).getoName());
+//            if(officeSchoolService.getData(i) != null) {
+            int oId = Integer.parseInt(data.get(i)
+                    .getoId());
+            if (officeSchoolService.getData(oId) != null) {
+                data.get(i).setoId(officeSchoolService
+                        .getData(oId)
+                        .getoName());
+            }
+            System.out.println("officeSchoolService.getData(oId)    " + officeSchoolService.getData(oId));
         }
         System.out.println("----------------------> 库长度size" + data.size());
         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
@@ -78,12 +86,12 @@ public class NetworkController {
         List<LsAddress> list = networkService.getAll();
 //        LsAddress lsAddress = networkService.getData(Integer.parseInt(oId));
         List<LsAddress> result = new ArrayList<LsAddress>();
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getoId().equals(oId)) {
-                    result.add(new LsAddress(list.get(j).getnId(), list.get(j).getoId(),list.get(j).getnMinAddress(),list.get(j).getnMaxAddress(),list.get(j).getMask()));
-                }
-
+        for (int j = 0; j < list.size(); j++) {
+            if (list.get(j).getoId().equals(oId)) {
+                result.add(new LsAddress(list.get(j).getnId(), list.get(j).getoId(), list.get(j).getnMinAddress(), list.get(j).getnMaxAddress(), list.get(j).getMask()));
             }
+
+        }
         for (int i = 0; i < result.size() - 1; i++) {
             for (int j = result.size() - 1; j > i; j--) {
                 if (result.get(j).getnId().equals(result.get(i).getnId())) {
@@ -95,7 +103,7 @@ public class NetworkController {
         return Msg.success().add("deps", result);
     }
 
-     /**
+    /**
      * 返回所有的部门信息，给下拉使用,大表添加时二级联动用到
      */
     @RequestMapping("/getIpWithOid")
@@ -105,12 +113,12 @@ public class NetworkController {
         List<LsIp> list = ipService.getAll();
 //        LsAddress lsAddress = networkService.getData(Integer.parseInt(oId));
         List<LsIp> result = new ArrayList<LsIp>();
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getnId().equals(nId)) {
-                    result.add(new LsIp(list.get(j).getiId(),list.get(j).getIp(),list.get(j).getnId(),list.get(j).getTag()));
-                }
-
+        for (int j = 0; j < list.size(); j++) {
+            if (list.get(j).getnId().equals(nId)) {
+                result.add(new LsIp(list.get(j).getiId(), list.get(j).getIp(), list.get(j).getnId(), list.get(j).getTag()));
             }
+
+        }
        /* for (int i = 0; i < result.size() - 1; i++) {
             for (int j = result.size() - 1; j > i; j--) {
                 if (result.get(j).getnId().equals(result.get(i).getnId())) {
@@ -147,16 +155,16 @@ public class NetworkController {
             int min = Integer.parseInt(StringUtils.substringAfterLast(minIp, "."));
             int max = Integer.parseInt(StringUtils.substringAfterLast(maxIp, "."));
 
-            for (int i = min; i <= max ; i++) {
-                ipService.saveData(new LsIp(pre + "." + i,networdId,"0"));
+            for (int i = min; i <= max; i++) {
+                ipService.saveData(new LsIp(pre + "." + i, networdId, "0"));
 
             }
-            System.out.println("数据  前缀 " + pre + "  " +  min + "-" + max);
+            System.out.println("数据  前缀 " + pre + "  " + min + "-" + max);
             return Msg.success();
         }
     }
     /*
-	*/
+    */
 
     /**
      * 根据id查询
@@ -217,7 +225,7 @@ public class NetworkController {
      * @param empName
      * @return
      *//*
-	@ResponseBody
+    @ResponseBody
 	@RequestMapping("/checkOffices")
 	public Msg checkuser(@RequestParam("empName")String empName){
 

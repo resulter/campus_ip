@@ -45,6 +45,10 @@ public class LsOffice {
         this.dIds = dIds;
     }
 
+    public LsOffice(String oName) {
+        this.oName = oName;
+    }
+
     @Override
     public String toString() {
         return "LsOffice{" +

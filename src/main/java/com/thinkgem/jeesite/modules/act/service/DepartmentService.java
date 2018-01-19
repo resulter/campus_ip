@@ -45,7 +45,9 @@ public class DepartmentService {
         // TODO Auto-generated method stub
         lsDepartmentMapper.insert(lsDepartment);
     }
-
+    public int saveDataGetId(LsDepartment lsDepartment) {
+        return lsDepartmentMapper.insertAndGetId(lsDepartment);
+    }
 
     /**
      * 部门更新
@@ -76,19 +78,29 @@ public class DepartmentService {
     }
 
     /**
-     * 检验部门名是否可用
+     * 检验部门名是否存在
      *
      * @param name
-     * @return  true：代表当前姓名可用   fasle：不可用
+     * @return  true：代表当前不存在   fasle：已存在
      */
     public boolean checkName(String name) {
-        // TODO Auto-generated method stub
-        
         LsDepartmentExample example = new LsDepartmentExample();
         LsDepartmentExample.Criteria criteria = example.createCriteria();
         criteria.andDNameEqualTo(name);
         long count = lsDepartmentMapper.countByExample(example);
         return count == 0;
+    }
+
+    /**
+     * 根据部门名称获取部门id
+     * @param depName
+     * @return
+     */
+    public int getId(String depName ){
+        LsDepartmentExample example = new LsDepartmentExample();
+        LsDepartmentExample.Criteria criteria = example.createCriteria();
+        criteria.andDNameEqualTo(depName);
+        return  lsDepartmentMapper.selectByExample(example).get(0).getdId();
     }
 
 }

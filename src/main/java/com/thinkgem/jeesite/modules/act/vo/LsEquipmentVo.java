@@ -7,7 +7,7 @@ public class LsEquipmentVo {
 
     private String officeName;//校区名
 
-    private  String oId;//校区ID
+    private String oId;//校区ID
 
     private String address;//网络地址段
 
@@ -17,7 +17,7 @@ public class LsEquipmentVo {
 
     private String mask;//掩码
 
-    private  String nId;//网段id
+    private String nId;//网段id
 
     private String ip;//ip
 

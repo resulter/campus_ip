@@ -1,10 +1,10 @@
 @echo off
 rem /**
-rem  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+rem  * Copyright &copy; 2017-2019 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
 rem  *
 rem  * Author: ThinkGem
 rem  */
-echo [INFO] ÉèÖÃMaven°æ±¾¿âÂ·¾¶
+echo [INFO] ï¿½ï¿½ï¿½ï¿½Mavenï¿½æ±¾ï¿½ï¿½Â·ï¿½ï¿½
 echo.
 
 cd %~dp0
@@ -12,35 +12,35 @@ cd %~dp0
 set MAVEN_HOME=%cd%\maven3
 set path=%MAVEN_HOME%\bin;%windir%\system32;%path%
 
-echo [INFO] ÕýÔÚÉèÖÃ...
+echo [INFO] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...
 echo.
 
 setlocal enabledelayedexpansion
 set txt=%cd%\repository
 
-echo [INFO] °æ±¾¿âÂ·¾¶ÉèÖÃÎª %txt%
+echo [INFO] ï¿½æ±¾ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª %txt%
 echo.
 
 set txt=!txt:\=/!
 call :replace %MAVEN_HOME%\conf\settings.xml.default @REPO_DIR@ %txt% >%MAVEN_HOME%\conf\settings.xml
 
-echo [INFO] ¡¶¡¶¡¶ÉèÖÃÍê³É£¬ÇëÎñ±Ø°´ÕÕÒÔÏÂËµÃ÷½øÐÐ²Ù×÷¡·¡·¡·
+echo [INFO] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 echo.
 
-echo [INFO] 1£©ÅäÖÃÏµÍ³»·¾³±äÁ¿, PATHÇ°ÃæÌí¼Ó£º
+echo [INFO] 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, PATHÇ°ï¿½ï¿½ï¿½ï¿½Ó£ï¿½
 echo [INFO]       %MAVEN_HOME%\bin;
 echo.
-echo [INFO] 2£©ÅäÖÃ Eclipse ÈçÏÂ
+echo [INFO] 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Eclipse ï¿½ï¿½ï¿½ï¿½
 echo.
-echo [INFO]    a£©ÓÐ Maven ²å¼þ£ºWindow --^> Preferences --^> Maven 
-echo [INFO]       --^> User Settings --^> µã»÷ Browse... °´Å¥£¬Ñ¡ÔñÄãµÄ 
-echo [INFO]       %MAVEN_HOME%\conf\settings.xml ÎÄ¼þ¡£
+echo [INFO]    aï¿½ï¿½ï¿½ï¿½ Maven ï¿½ï¿½ï¿½ï¿½ï¿½Window --^> Preferences --^> Maven 
+echo [INFO]       --^> User Settings --^> ï¿½ï¿½ï¿½ Browse... ï¿½ï¿½Å¥ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ 
+echo [INFO]       %MAVEN_HOME%\conf\settings.xml ï¿½Ä¼ï¿½ï¿½ï¿½
 echo.
-echo [INFO]    b£©Ã»ÓÐ Maven ²å¼þ£ºWindow --^> Preferences --^> Java 
-echo [INFO]       --^> Bulid Path --^> Classpath Variables --^> µã»÷ new... °´Å¥
-echo [INFO]       Name£ºM2_REPO
-echo [INFO]       Path£º%cd%\repository
-echo [INFO]       µã»÷ OK °´Å¥
+echo [INFO]    bï¿½ï¿½Ã»ï¿½ï¿½ Maven ï¿½ï¿½ï¿½ï¿½ï¿½Window --^> Preferences --^> Java 
+echo [INFO]       --^> Bulid Path --^> Classpath Variables --^> ï¿½ï¿½ï¿½ new... ï¿½ï¿½Å¥
+echo [INFO]       Nameï¿½ï¿½M2_REPO
+echo [INFO]       Pathï¿½ï¿½%cd%\repository
+echo [INFO]       ï¿½ï¿½ï¿½ OK ï¿½ï¿½Å¥
 echo.
 
 pause

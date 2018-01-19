@@ -74,19 +74,32 @@ public class IpService {
     }
 
     /**
-     * 检验IP名是否可用
+     * 检验校区名是否可用
      *
      * @param name
-     * @return true：代表当前姓名可用   fasle：不可用
+     * @return  true：代表当前姓名可用   fasle：不可用
      */
-  /*  public boolean checkName(String name) {
+    public boolean checkName(String name) {
         // TODO Auto-generated method stub
-        LsOfficeExample example1 = new LsOfficeExample();
-        LsOfficeExample.Criteria criteria1 = example1.createCriteria();
-        criteria1.andONameEqualTo(name);
 
-        long count = lsOfficeMapper.countByExample(example1);
+
+
+        LsIpExample example = new LsIpExample();
+        LsIpExample.Criteria criteria = example.createCriteria();
+        criteria.andIpEqualTo(name);
+        long count = lsIpMapper.countByExample(example);
         return count == 0;
     }
-*/
+
+    /**
+     * 根据部门名称获取部门id
+     * @param name
+     * @return
+     */
+    public int getId(String name ){
+        LsIpExample example = new LsIpExample();
+        LsIpExample.Criteria criteria = example.createCriteria();
+        criteria.andIpEqualTo(name);
+        return  lsIpMapper.selectByExample(example).get(0).getiId();
+    }
 }

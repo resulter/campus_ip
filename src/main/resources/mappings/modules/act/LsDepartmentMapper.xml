@@ -100,6 +100,11 @@
     insert into ls_department (d_id, d_name)
     values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertAndGetId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsDepartment" useGeneratedKeys="true" keyProperty="dId"  >
+    insert into ls_department (d_id, d_name)
+    values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR})
+  </insert>
+
   <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsDepartment" >
     insert into ls_department
     <trim prefix="(" suffix=")" suffixOverrides="," >
