@@ -207,16 +207,20 @@
 			<version>${validator.version}</version>
 		</dependency>
 		<!-- SPRING end -->
+		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
-			<version>5.0.0</version>
+			<version>5.1.2</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
 		<dependency>
 			<groupId>com.github.jsqlparser</groupId>
 			<artifactId>jsqlparser</artifactId>
-			<version>0.9.6</version>
+			<version>1.1</version>
 		</dependency>
+
 		<!-- AOP begin -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -283,14 +287,7 @@
 			<version>${mysql.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.1.0.7.0</version>
-			<scope>test</scope>
-		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
 
 		<dependency>
 			<groupId>net.sourceforge.jtds</groupId>

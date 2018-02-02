@@ -176,6 +176,17 @@
       #{equipmentName,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
+    <insert id="insertByBatch" parameterType="java.util.List">
+        insert into ls_equipment (e_id, i_id, d_id,
+        equipment_name, location, username,
+        password, remark)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.eId,jdbcType=INTEGER}, #{item.iId,jdbcType=VARCHAR}, #{item.dId,jdbcType=VARCHAR},
+            #{item.equipmentName,jdbcType=VARCHAR}, #{item.location,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
     <insert id="insertAndGetId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsEquipment"
             useGeneratedKeys="true" keyProperty="userId">
     insert into ls_equipment (e_id, i_id, d_id,

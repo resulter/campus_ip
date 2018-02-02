@@ -96,6 +96,17 @@ public class NetworkService {
         return count == 0;
     }
 
+    public boolean checkNameByStr(String name) {
+        LsAddressExample example = new LsAddressExample();
+        LsAddressExample.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotBlank(name)){
+            name = "%" + name + "%";
+        }
+        criteria.andNMinAddressLike(name);
+        long count = lsAddressMapper.countByExample(example);
+        return count == 0;
+    }
+
 
     public boolean checkNetwork(String name) {
         List<LsAddress> list =lsAddressMapper.selectByExample(null);
@@ -120,7 +131,10 @@ public class NetworkService {
     public int getId(String name) {
         LsAddressExample example = new LsAddressExample();
         LsAddressExample.Criteria criteria = example.createCriteria();
-        criteria.andNMinAddressEqualTo(name);
+        if(StringUtils.isNotBlank(name)){
+            name = "%" + name + "%";
+        }
+        criteria.andNMinAddressLike(name);
         return lsAddressMapper.selectByExample(example).get(0).getnId();
     }
 

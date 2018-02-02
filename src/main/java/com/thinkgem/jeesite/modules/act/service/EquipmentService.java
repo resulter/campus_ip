@@ -145,6 +145,9 @@ public class EquipmentService {
         lsEquipmentMapper.insert(lsEquipment);
     }
 
+    public void savaDataByBatch(List<LsEquipment> lsEquipments){
+        lsEquipmentMapper.insertByBatch(lsEquipments);
+    }
 
     /**
      * 设备更新

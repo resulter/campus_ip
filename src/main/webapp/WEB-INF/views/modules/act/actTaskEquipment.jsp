@@ -492,12 +492,12 @@
     //批量上传，跳转到import.jsp
     $("#import_btn").click(function () {
 
-        window.location.href = "/a/importExcelNew";
+        window.location.href = "${APP_PATH}/a/importExcelNew";
 //        window.location.href='data/gotoImport';
     });
     $("#export_btn").click(function () {
 
-        window.location.href = "/a/exportExcelNew";
+        window.location.href = "${APP_PATH}/a/exportExcelNew";
 //        window.location.href='data/gotoImport';
     });
 

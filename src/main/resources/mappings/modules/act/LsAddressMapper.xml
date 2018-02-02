@@ -1,213 +1,218 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.thinkgem.jeesite.modules.act.dao.LsAddressMapper" >
-  <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.act.entity.LsAddress" >
-    <id column="n_id" property="nId" jdbcType="INTEGER" />
-    <result column="o_id" property="oId" jdbcType="VARCHAR" />
-    <result column="n_min_address" property="nMinAddress" jdbcType="VARCHAR" />
-    <result column="n_max_address" property="nMaxAddress" jdbcType="VARCHAR" />
-    <result column="mask" property="mask" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.thinkgem.jeesite.modules.act.dao.LsAddressMapper">
+    <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.act.entity.LsAddress">
+        <id column="n_id" property="nId" jdbcType="INTEGER"/>
+        <result column="o_id" property="oId" jdbcType="VARCHAR"/>
+        <result column="n_min_address" property="nMinAddress" jdbcType="VARCHAR"/>
+        <result column="n_max_address" property="nMaxAddress" jdbcType="VARCHAR"/>
+        <result column="mask" property="mask" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     n_id, o_id, n_min_address, n_max_address, mask
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddressExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from ls_address
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from ls_address
-    where n_id = #{nId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddressExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from ls_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from ls_address
+        where n_id = #{nId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from ls_address
     where n_id = #{nId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddressExample" >
-    delete from ls_address
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress" >
+    <delete id="deleteByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddressExample">
+        delete from ls_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress">
     insert into ls_address (n_id, o_id, n_min_address,
     n_max_address, mask)
     values (#{nId,jdbcType=INTEGER}, #{oId,jdbcType=VARCHAR}, #{nMinAddress,jdbcType=VARCHAR},
     #{nMaxAddress,jdbcType=VARCHAR}, #{mask,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="nId" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress" >
+    <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="nId"
+            parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress">
     insert into ls_address (n_id, o_id, n_min_address,
     n_max_address, mask)
     values (#{nId,jdbcType=INTEGER}, #{oId,jdbcType=VARCHAR}, #{nMinAddress,jdbcType=VARCHAR},
     #{nMaxAddress,jdbcType=VARCHAR}, #{mask,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress" >
-    insert into ls_address
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="nId != null" >
-        n_id,
-      </if>
-      <if test="oId != null" >
-        o_id,
-      </if>
-      <if test="nMinAddress != null" >
-        n_min_address,
-      </if>
-      <if test="nMaxAddress != null" >
-        n_max_address,
-      </if>
-      <if test="mask != null" >
-        mask,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="nId != null" >
-        #{nId,jdbcType=INTEGER},
-      </if>
-      <if test="oId != null" >
-        #{oId,jdbcType=VARCHAR},
-      </if>
-      <if test="nMinAddress != null" >
-        #{nMinAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="nMaxAddress != null" >
-        #{nMaxAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="mask != null" >
-        #{mask,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddressExample" resultType="java.lang.Integer" >
-    select count(*) from ls_address
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update ls_address
-    <set >
-      <if test="record.nId != null" >
-        n_id = #{record.nId,jdbcType=INTEGER},
-      </if>
-      <if test="record.oId != null" >
+    <insert id="insertSelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress">
+        insert into ls_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nId != null">
+                n_id,
+            </if>
+            <if test="oId != null">
+                o_id,
+            </if>
+            <if test="nMinAddress != null">
+                n_min_address,
+            </if>
+            <if test="nMaxAddress != null">
+                n_max_address,
+            </if>
+            <if test="mask != null">
+                mask,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nId != null">
+                #{nId,jdbcType=INTEGER},
+            </if>
+            <if test="oId != null">
+                #{oId,jdbcType=VARCHAR},
+            </if>
+            <if test="nMinAddress != null">
+                #{nMinAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="nMaxAddress != null">
+                #{nMaxAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="mask != null">
+                #{mask,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddressExample"
+            resultType="java.lang.Integer">
+        select count(*) from ls_address
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update ls_address
+        <set>
+            <if test="record.nId != null">
+                n_id = #{record.nId,jdbcType=INTEGER},
+            </if>
+            <if test="record.oId != null">
+                o_id = #{record.oId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nMinAddress != null">
+                n_min_address = #{record.nMinAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nMaxAddress != null">
+                n_max_address = #{record.nMaxAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mask != null">
+                mask = #{record.mask,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update ls_address
+        set n_id = #{record.nId,jdbcType=INTEGER},
         o_id = #{record.oId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nMinAddress != null" >
         n_min_address = #{record.nMinAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nMaxAddress != null" >
         n_max_address = #{record.nMaxAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mask != null" >
-        mask = #{record.mask,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update ls_address
-    set n_id = #{record.nId,jdbcType=INTEGER},
-    o_id = #{record.oId,jdbcType=VARCHAR},
-    n_min_address = #{record.nMinAddress,jdbcType=VARCHAR},
-    n_max_address = #{record.nMaxAddress,jdbcType=VARCHAR},
-    mask = #{record.mask,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress" >
-    update ls_address
-    <set >
-      <if test="oId != null" >
-        o_id = #{oId,jdbcType=VARCHAR},
-      </if>
-      <if test="nMinAddress != null" >
-        n_min_address = #{nMinAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="nMaxAddress != null" >
-        n_max_address = #{nMaxAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="mask != null" >
-        mask = #{mask,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where n_id = #{nId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress" >
+        mask = #{record.mask,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress">
+        update ls_address
+        <set>
+            <if test="oId != null">
+                o_id = #{oId,jdbcType=VARCHAR},
+            </if>
+            <if test="nMinAddress != null">
+                n_min_address = #{nMinAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="nMaxAddress != null">
+                n_max_address = #{nMaxAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="mask != null">
+                mask = #{mask,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where n_id = #{nId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thinkgem.jeesite.modules.act.entity.LsAddress">
     update ls_address
     set o_id = #{oId,jdbcType=VARCHAR},
       n_min_address = #{nMinAddress,jdbcType=VARCHAR},

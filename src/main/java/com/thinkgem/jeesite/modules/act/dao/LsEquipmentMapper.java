@@ -8,6 +8,7 @@ import com.thinkgem.jeesite.modules.act.vo.LsEquipmentVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+
 @MyBatisDao
 public interface LsEquipmentMapper {
     int countByExample(LsEquipmentExample example);
@@ -17,6 +18,8 @@ public interface LsEquipmentMapper {
     int deleteByPrimaryKey(Integer eId);
 
     int insert(LsEquipment record);
+
+    int insertByBatch(List<LsEquipment> records);
 
     int insertAndGetId(LsEquipment record);
 
