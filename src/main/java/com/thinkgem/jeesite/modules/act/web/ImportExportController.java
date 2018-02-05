@@ -86,7 +86,7 @@ public class ImportExportController {
 
     @RequestMapping(value = "/uploadFileAndImportNew")
     @ResponseBody
-    public ModelAndView upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) {
+    public ModelAndView upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) throws IOException {
 
         System.out.println("开始");
         String path = request.getSession().getServletContext().getRealPath("upload");
@@ -129,23 +129,23 @@ public class ImportExportController {
            /* for (int i = 0; i < result.size(); i++) {
                 System.out.println("----result"+result.get(i).toString());
             }*/
-           List<LsEquipment> lsEquipments = new ArrayList<LsEquipment>();
+            List<LsEquipment> lsEquipments = new ArrayList<LsEquipment>();
             for (int i = 0; i < result.size(); i++) {
                 if (!("".equals(result.get(i).get("校区名称")) && "".equals(result.get(i).get("网络地址段")) && "".equals(result.get(i).get("掩码"))
-                         && "".equals(result.get(i).get("ip地址")) && "".equals(result.get(i).get("使用设备")) && "".equals(result.get(i).get("使用部门"))
-                         && "".equals(result.get(i).get("存放位置"))&& "".equals(result.get(i).get("用户名")) && "".equals(result.get(i).get("密码"))
-                         && "".equals(result.get(i).get("备注")))) {
+                        && "".equals(result.get(i).get("ip地址")) && "".equals(result.get(i).get("使用设备")) && "".equals(result.get(i).get("使用部门"))
+                        && "".equals(result.get(i).get("存放位置")) && "".equals(result.get(i).get("用户名")) && "".equals(result.get(i).get("密码"))
+                        && "".equals(result.get(i).get("备注")))) {
 // TODO: 2018/2/1 部门为空时，无法返回部门id，待解决 
-                    String officename = (result.get(i).get("校区名称")==null || (result.get(i).get("校区名称")).equals(""))?(String) result.get(0).get("校区名称"):(String) result.get(i).get("校区名称");
-                    String address = (result.get(i).get("网络地址段")==null || (result.get(i).get("网络地址段")).equals(""))?(String) result.get(0).get("网络地址段"):(String) result.get(i).get("网络地址段");
-                    String mask = (result.get(i).get("掩码")==null || (result.get(i).get("掩码")).equals(""))?(String) result.get(0).get("掩码"):(String) result.get(i).get("掩码");
-                    String ip = (result.get(i).get("ip地址")==null || (result.get(i).get("ip地址")).equals(""))?"0.0.0.0":(String) result.get(i).get("ip地址");
-                    String equipment = (result.get(i).get("使用设备")==null || (result.get(i).get("使用设备")).equals(""))?"":(String) result.get(i).get("使用设备");
-                    String department = (result.get(i).get("使用部门")==null || (result.get(i).get("使用部门")).equals(""))?"":(String) result.get(i).get("使用部门");
-                    String location = (result.get(i).get("存放位置")==null || (result.get(i).get("存放位置")).equals(""))?"":(String) result.get(i).get("存放位置");
-                    String username = (result.get(i).get("用户名")==null || (result.get(i).get("用户名")).equals(""))?"":(String) result.get(i).get("用户名");
-                    String password = (result.get(i).get("密码")==null || (result.get(i).get("密码")).equals(""))?"":(String) result.get(i).get("密码");
-                    String remark = (result.get(i).get("备注")==null || (result.get(i).get("备注")).equals(""))?"":(String) result.get(i).get("备注");
+                    String officename = (result.get(i).get("校区名称") == null || (result.get(i).get("校区名称")).equals("")) ? (String) result.get(0).get("校区名称") : (String) result.get(i).get("校区名称");
+                    String address = (result.get(i).get("网络地址段") == null || (result.get(i).get("网络地址段")).equals("")) ? (String) result.get(0).get("网络地址段") : (String) result.get(i).get("网络地址段");
+                    String mask = (result.get(i).get("掩码") == null || (result.get(i).get("掩码")).equals("")) ? (String) result.get(0).get("掩码") : (String) result.get(i).get("掩码");
+                    String ip = (result.get(i).get("ip地址") == null || (result.get(i).get("ip地址")).equals("")) ? "0.0.0.0" : (String) result.get(i).get("ip地址");
+                    String equipment = (result.get(i).get("使用设备") == null || (result.get(i).get("使用设备")).equals("")) ? "" : (String) result.get(i).get("使用设备");
+                    String department = (result.get(i).get("使用部门") == null || (result.get(i).get("使用部门")).equals("")) ? "" : (String) result.get(i).get("使用部门");
+                    String location = (result.get(i).get("存放位置") == null || (result.get(i).get("存放位置")).equals("")) ? "" : (String) result.get(i).get("存放位置");
+                    String username = (result.get(i).get("用户名") == null || (result.get(i).get("用户名")).equals("")) ? "" : (String) result.get(i).get("用户名");
+                    String password = (result.get(i).get("密码") == null || (result.get(i).get("密码")).equals("")) ? "" : (String) result.get(i).get("密码");
+                    String remark = (result.get(i).get("备注") == null || (result.get(i).get("备注")).equals("")) ? "" : (String) result.get(i).get("备注");
 //                    baseDataService.saveData(baseData);
 
                     //ls_department 表操作
@@ -153,10 +153,11 @@ public class ImportExportController {
                     if (departmentService.checkName(department)) {
                         // 直接这样并取不到返回来的主键id    officeId = officeSchoolService.saveDataGetId(new LsOffice(officename));
                         LsDepartment lsDepartment = new LsDepartment(department);
-                        if(!"".equals(lsDepartment)) {
+                        if (StringUtils.isNotBlank(department)) {
                             departmentService.saveDataGetId(lsDepartment);
+                            depId = lsDepartment.getdId();
+
                         }
-                        depId = lsDepartment.getdId();
                     } else {
                         depId = departmentService.getId(department);
                     }
@@ -176,28 +177,29 @@ public class ImportExportController {
                     System.out.println("get到的数据  office " + lsOffice);
                     if ("".equals(lsOffice.getdIds()) || lsOffice.getdIds() == null) {
                         lsOffice.setdIds(depId + "");
-                    }
-                    else {
+                    } else {
                         String dep = lsOffice.getdIds() + "," + depId;
-                        String [] deps = dep.split(",");
+                        String[] deps = dep.split(",");
                         Set<String> set = new HashSet<String>();
-                        for(int k=0;k<deps.length;k++){
+                        for (int k = 0; k < deps.length; k++) {
                             set.add(deps[k]);
                         }
                         String[] arrayResult = (String[]) set.toArray(new String[set.size()]);
                         String s = "";
                         for (int j = 0; j < arrayResult.length; j++) {
-                            s+= arrayResult[j] + ",";
+                            s += arrayResult[j] + ",";
                         }
-                        lsOffice.setdIds(s.substring(0,s.length()-1));
+                        lsOffice.setdIds(s.substring(0, s.length() - 1));
                     }
                     officeSchoolService.updateData(lsOffice);
                     //ls_address表操作
                     int networkId = 0;
                     if (networkService.checkNameByStr(StringUtils.substringBeforeLast(address, "."))) {
-                        LsAddress lsAddress = new LsAddress(officeId + "", StringUtils.substringBeforeLast(address, ".") + ".0", StringUtils.substringBeforeLast(address, ".") + ".255", mask);
-                       networkService.saveDataGetId(lsAddress);
-                        networkId =lsAddress.getnId();
+                        if(StringUtils.isNotBlank(address)) {
+                            LsAddress lsAddress = new LsAddress(officeId + "", StringUtils.substringBeforeLast(address, ".") + ".0", StringUtils.substringBeforeLast(address, ".") + ".255", mask);
+                            networkService.saveDataGetId(lsAddress);
+                            networkId = lsAddress.getnId();
+                        }
                     } else {
                         networkId = networkService.getId(StringUtils.substringBeforeLast(address, "."));
                     }
@@ -228,6 +230,10 @@ public class ImportExportController {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (input != null) {
+                input.close();
+            }
         }
         return new ModelAndView("redirect:/a/backCampusNew");
     }

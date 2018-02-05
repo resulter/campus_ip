@@ -67,16 +67,16 @@ public class OfficeDetailController {
 //        List<LsEquipment> data = equipmentService.getAll();
         List<LsEquipmentVo> data = equipmentService.getVoAllEquipment(officeId, address_search_select, ip_search_input, equipment_search_input);
         for (int i = 0; i < data.size(); i++) {
-            if(data.get(i).getIpTag().equals("0")){
+            if (data.get(i).getIpTag().equals("0")) {
                 data.get(i).setIpTag("是");
             }
-            if(data.get(i).getIpTag().equals("1")){
+            if (data.get(i).getIpTag().equals("1")) {
                 data.get(i).setIpTag("否");
             }
         }
 //        List<LsEquipmentVo> data = equipmentService.getResult(officeId, address_search_select, ip_search_input, equipment_search_input);
-        System.out.println(" data 数据  "+data.size() + "    " + data.toString());
-        System.out.println(" other数据  "+equipmentService.getVoAll(officeId, address_search_select, ip_search_input, equipment_search_input).size() + "    " + equipmentService.getAll().toString());
+        System.out.println(" data 数据  " + data.size() + "    " + data.toString());
+        System.out.println(" other数据  " + equipmentService.getVoAll(officeId, address_search_select, ip_search_input, equipment_search_input).size() + "    " + equipmentService.getAll().toString());
         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
         // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
         PageInfo page = new PageInfo(data, 5);
@@ -185,7 +185,7 @@ public class OfficeDetailController {
         }
         for (int i = 0; i < result.size() - 1; i++) {
             for (int j = result.size() - 1; j > i; j--) {
-                if (result.get(j).getnId().equals(result.get(i).getnId())) {
+                if (StringUtils.substringBeforeLast(String.valueOf(result.get(i).getnMinAddress()), ".").equals(StringUtils.substringBeforeLast(String.valueOf(result.get(j).getnMaxAddress()), "."))) {
                     result.remove(j);
                 }
             }
