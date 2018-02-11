@@ -197,7 +197,7 @@
                          <input type="checkbox" id="check_all" style="width: 20px"/>
                      </th>
  --%>
-                    <%--<th style="width: 140px">设备ID</th>--%>
+                    <th style="width: 1px;display: none"> </th>
                     <th style="width: 140px">校区名称</th>
                     <th style="width: 150px">网络地址段</th>
                     <th style="width: 150px">掩码</th>
@@ -275,7 +275,7 @@
         $.each(emps, function (index, item) {
             var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>").addClass();
 //            var id = $("<td style='width: 0px'></td>").append(item.id);
-            var eId = $("<td style='width: 0px></td>").append(item.eId).attr("title", item.eId);
+            var eId = $("<td style='width: 0px;display: none'></td>").append(item.eId).attr("title", item.eId);
             var oName = $("<td></td>").append(item.officeName).attr("title", item.officeName);
 
             var address = $("<td></td>").append(item.address).attr("title", item.minAddress + " - " + item.maxAddress);
