@@ -274,7 +274,7 @@
         var emps = result.extend.pageInfo.list;
         $.each(emps, function (index, item) {
             var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>").addClass();
-            console.log("item", item);
+            console.log(item);
 //            var id = $("<td style='width: 0px'></td>").append(item.id);
             var eId = $("<td style='width: 0px;display: none'></td>").append(item.eId).attr("title", item.eId);
             var oName = $("<td></td>").append(item.officeName).attr("title", item.officeName);
