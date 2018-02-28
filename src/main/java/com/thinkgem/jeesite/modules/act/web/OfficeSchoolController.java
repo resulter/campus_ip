@@ -90,7 +90,9 @@ public class OfficeSchoolController {
                     }
 
                 }
-                depName = depName.substring(0, depName.length() - 1);
+                if(depName.length()>1) {
+                    depName = depName.substring(0, depName.length() - 1);
+                }
                 System.out.println("字符串 " + depName + "   "  + data.get(i).getdIds());
                 data.get(i).setdIds(depName);
             }
