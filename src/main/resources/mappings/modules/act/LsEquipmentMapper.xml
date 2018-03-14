@@ -150,6 +150,7 @@
         <if test='search_ip!="%null%"'>and i.ip like CONCAT(CONCAT('%', #{search_ip}), '%')</if>
         <if test='search_equipment!=""'>and e.equipment_name like CONCAT(CONCAT('%', #{search_equipment}), '%')
         </if>
+        <if test="sort">order by e.equipment_name desc,i.i_id asc</if>
     </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">

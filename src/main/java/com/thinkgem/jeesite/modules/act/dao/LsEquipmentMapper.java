@@ -31,6 +31,7 @@ public interface LsEquipmentMapper {
 
     List<LsEquipmentVo> selectBySearchMapForUserUtils(SearchMapNew searchMapNew);
 
+
     LsEquipment selectByPrimaryKey(Integer eId);
 
     int updateByExampleSelective(@Param("record") LsEquipment record, @Param("example") LsEquipmentExample example);

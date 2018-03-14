@@ -8,6 +8,7 @@ public class SearchMapNew {
     String search_address;
     String search_ip;
     String pre;
+    boolean sort;
 
     public SearchMapNew(String officeId, String search_equipment, String search_address, String search_ip) {
         this.officeId = officeId;
@@ -16,6 +17,13 @@ public class SearchMapNew {
         this.search_ip = search_ip;
     }
 
+    public SearchMapNew(String officeId, String search_equipment, String search_address, String search_ip, boolean sort) {
+        this.officeId = officeId;
+        this.search_equipment = search_equipment;
+        this.search_address = search_address;
+        this.search_ip = search_ip;
+        this.sort = sort;
+    }
 
     public SearchMapNew() {
     }
@@ -27,6 +35,8 @@ public class SearchMapNew {
                 ", search_equipment='" + search_equipment + '\'' +
                 ", search_address='" + search_address + '\'' +
                 ", search_ip='" + search_ip + '\'' +
+                ", pre='" + pre + '\'' +
+                ", sort=" + sort +
                 '}';
     }
 
@@ -71,5 +81,17 @@ public class SearchMapNew {
 
     public void setOfficeId(String officeId) {
         this.officeId = officeId;
+    }
+
+    public void setPre(String pre) {
+        this.pre = pre;
+    }
+
+    public boolean getSort() {
+        return sort;
+    }
+
+    public void setSort(boolean sort) {
+        this.sort = sort;
     }
 }

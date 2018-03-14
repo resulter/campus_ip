@@ -38,7 +38,11 @@
             float: right
         }
 
-        /*#page_info_area,#page_nav_area{float:left;}*/
+        .first {
+            width: 70px;
+            padding: 6px;
+        }
+
     </style>
 </head>
 <body>
@@ -152,32 +156,20 @@
 
 <!-- 搭建显示页面 -->
 <div style="margin-left: 30px">
-    <!-- 按钮 -->
-    <%-- <div class="row">
-         <div class="col-md-4 col-md-offset-8">
-             <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
-             <button class="btn btn-danger" id="emp_delete_all_btn">批量删除</button>
-             &lt;%&ndash;  <button class="btn btn-info" id="import_btn">批量导入</button>
-               <button class="btn btn-info" id="export_btn">导出</button>&ndash;%&gt;
-         </div>
-     </div>--%>
     <form>
 
         <div class="form-group" id="searchInfo">
-            <%--<label style="width: 30px">网络地址段</label>--%>
             <div class="col-sm-3">
                 <!-- 部门提交部门id即可 -->
                 <select class="form-control" name="search_address" id="address_search_select"
                         onchange=" changeSelectOffice()">
                 </select>
             </div>
-            <%--<label  style="width: 30px">ip</label>--%>
             <div class="col-sm-2">
                 <input type="text" name="search_ip" class="form-control" id="ip_search_input"
                        placeholder="ip">
                 <span class="help-block"></span>
             </div>
-            <%--<label  style="width: 30px">设备</label>--%>
             <div class="col-sm-2">
                 <input type="text" name="search_equipment" class="form-control" id="equipment_search_input"
                        placeholder="设备名称">
@@ -193,11 +185,7 @@
             <table class="table table-hover" id="emps_table" style="table-layout: fixed">
                 <thead>
                 <tr>
-                    <%-- <th width="30px">
-                         <input type="checkbox" id="check_all" style="width: 20px"/>
-                     </th>
- --%>
-                    <th style="width: 1px;display: none"> </th>
+                    <th style="width: 1px;display: none"></th>
                     <th style="width: 140px">校区名称</th>
                     <th style="width: 150px">网络地址段</th>
                     <th style="width: 150px">掩码</th>
@@ -210,6 +198,12 @@
                     <th style="width: 80px">是否可用</th>
 
                     <th style="width: 200px">备注</th>
+                    <th style="width: 200px">
+                        <div class="checkbox">
+                            <input type="checkbox" id="checkBoxUsed">
+                            <div class="btn-danger first" id="used_first">使用优先</div>
+                        </div>
+                    </th>
 
                 </tr>
                 </thead>
@@ -252,7 +246,8 @@
                 "address_search_select": $("#address_search_select option:selected").text(),
                 "ip_search_input": $("#ip_search_input").val(),
                 "equipment_search_input": $("#equipment_search_input").val(),
-                "officeId":${officeId}
+                "officeId":${officeId},
+                "isSort": $("#checkBoxUsed").is(":checked")
             },
             type: "GET",
             success: function (result) {
@@ -301,6 +296,7 @@
             //为编辑按钮添加一个自定义的属性，来表示当前员工id
             editBtn.attr("edit-id", item.eId);
             editBtn.attr("edit-ip", item.ip);
+            editBtn.attr("off", item.officeName);
 
             var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
@@ -310,8 +306,6 @@
             //var delBtn =
             //append方法执行完成以后还是返回原来的元素
             $("<tr></tr>")
-            //                .append(checkBoxTd)
-            //                .append(id)
                 .append(eId)
                 .append(oName)
                 .append(address)
@@ -324,7 +318,7 @@
                 .append(password)
                 .append(ipTag)
                 .append(remark)
-                            .append(btnTd)
+                .append(btnTd)
                 .appendTo("#emps_table tbody");
         });
     }
@@ -448,16 +442,12 @@
             url: "${APP_PATH}/a/getOffices",
             type: "GET",
             success: function (result) {
-                //{"code":100,"msg":"处理成功！",
-                //"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
-                //console.log(result);
-                //显示部门信息在下拉列表中
-                //$("#empAddModal select").append("")
                 $.each(result.extend.offices, function () {
                     var optionEle = $("<option></option>").append(this.oName).attr("value", this.oId);
                     optionEle.appendTo(ele);
                 });
                 $(ele).trigger('change');
+
             }
         });
 
@@ -473,11 +463,6 @@
             data: "oId=" + oId,
             type: "GET",
             success: function (result) {
-                //{"code":100,"msg":"处理成功！",
-                //"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
-                //console.log(result);
-                //显示部门信息在下拉列表中
-                //$("#empAddModal select").append("")
                 $.each(result.extend.deps, function () {
                     if (this.nId < 0) {
                         var optionEle = $("<option></option>").append("全部网段").attr("value", this.nId);
@@ -651,8 +636,10 @@
         //1、查出部门信息，并显示部门列表
 //        getDepts("#empUpdateModal select");
         //2、查出员工信息，显示员工信息
-        getEmp($(this).attr("edit-id"));
-        $("#empUpdateModal h4").text("修改原IP为" +  $(this).attr("edit-ip") + "的设备信息")
+        initData($(this).attr("edit-id"));
+        $("#empUpdateModal h4").text("修改原IP为" + $(this).attr("edit-ip") + "的设备信息");
+//        $("#office_name_update_select").val($(this).attr("off"));
+//        alert($(this).attr("off"));
         //3、把员工的id传递给模态框的更新按钮
         $("#emp_update_btn").attr("edit-id", $(this).attr("edit-id"));
         $("#empUpdateModal").modal({
@@ -660,7 +647,7 @@
         });
     });
 
-    function getEmp(id) {
+    function initData(id) {
         $.ajax({
             url: "${APP_PATH}/a/equipment/" + id,
             type: "GET",
@@ -669,6 +656,7 @@
                 console.log("---->" + result);
                 var myData = result.extend.equipmentVo;
 
+                alert(myData.oId);
 
 //                alert(myData.officeName);
 //                alert(myData.campusName);
@@ -677,23 +665,124 @@
 //                $("#office_name_update_select option[text = '海龙校区']").attr("selected", true);
 
 //                console.log($("#office_name_update_select").val(myData.officeName));
-//                $("#office_name_update_select").attr('selected',true).val(myData.officeName);
-//                $("#network_update_select").val(myData.minAddress + myData.maxAddress);
+//                $("#office_name_update_select").attr('selected',true).val([myData.officeName]).trigger('change');
+                //$("#office_name_update_select").val(myData.officeName);
+//                getOffices("#empUpdateModal select[name=oId]", myData.oId);
+                $("#network_update_select").val(myData.minAddress + myData.maxAddress);
                 $("#equipment_mask_update_input").val(myData.mask);
-//                $("#ip_update_select").val(myData.ip);
+                $("#ip_update_select").val(myData.ip);
                 $("#equipment_using_update_input").val(myData.equipmentName);
-//                $("#department_update_select").val(myData.department);
+                $("#department_update_select").val(myData.department);
                 $("#equipment_location_update_input").val(myData.location);
                 $("#equipment_username_update_input").val(myData.username);
                 $("#equipment_password_update_input").val(myData.password);
                 $("#equipment_remark_update_input").val(myData.remark);
                 /*    $("#empUpdateModal input[name=gender]").val([myData.gender]);
                     $("#empUpdateModal select").val([myData.dId]);*/
+                initEditiModal("#empUpdateModal select[name=oId]", myData.oId, "#empUpdateModal select[name=nId]", myData.nId, "#empUpdateModal select[name=iId]", myData.iId, "#empUpdateModal select[name=dId]", myData.dId)
             }
 
         });
     }
 
+    function initEditiModal(ele1, oId, ele2, nId, ele3, iId, ele4, dId) {
+        alert(oId+"  " + nId +"   " +iId + "   " + dId);
+        //设置校区默认值
+        //清空之前下拉列表的值
+        $(ele1).empty();
+        $.ajax({
+            url: "${APP_PATH}/a/getOffices",
+            type: "GET",
+            success: function (result) {
+                $.each(result.extend.offices, function () {
+                    var optionEle = $("<option></option>").append(this.oName).attr("value", this.oId);
+                    optionEle.appendTo(ele1);
+                });
+                $(ele1).trigger('change');
+                if (oId != null) {
+                    $("#office_name_update_select").val(oId);
+                }
+            }
+        });
+
+        //设置网段默认值
+        //清空之前下拉列表的值
+        $(ele2).empty();
+        $.ajax({
+            url: "${APP_PATH}/a/getNetworksDetailsWithOid",
+            data: "oId=" + oId,
+            type: "GET",
+            success: function (result) {
+                $.each(result.extend.deps, function () {
+                    if (this.nId < 0) {
+                        var optionEle = $("<option></option>").append("全部网段").attr("value", this.nId);
+                    } else {
+                        var pre = new Array();
+                        pre = this.nMinAddress.split(".");
+                        var pres = "";
+                        for (i = 0; i < 3; i++) {
+                            pres += pre[i] + ".";
+                        }
+                        pres = pres.substr(0, pres.length - 1);
+                        var optionEle = $("<option></option>").append(pres).attr("value", this.nId).attr("title", pres + ".*");
+                    }
+                    $("#equipment_mask_add_input").val(this.mask);
+                    optionEle.appendTo(ele2);
+                });
+                $(ele2).trigger('change');
+                if (nId != null) {
+                    $("#network_update_select").val(nId);
+                }
+            }
+        });
+        //设置ip默认值
+        //清空之前下拉列表的值
+        $(ele3).empty();
+        $.ajax({
+            url: "${APP_PATH}/a/getIpWithOid",
+            data: "nId=" + nId,
+            type: "GET",
+            success: function (result) {
+                //{"code":100,"msg":"处理成功！",
+                //"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
+                //console.log(result);
+                //显示部门信息在下拉列表中
+                //$("#empAddModal select").append("")
+                $.each(result.extend.ips, function () {
+                    var optionEle = $("<option></option>").append(this.ip).attr("value", this.iId);
+                    optionEle.appendTo(ele3);
+                });
+                $(ele3).trigger('change');
+                if (iId != null) {
+                    $("#ip_update_select").val(iId);
+                }
+            }
+        });
+        //设置部门默认值
+        //清空之前下拉列表的值
+        $(ele4).empty();
+        $.ajax({
+            url: "${APP_PATH}/a/getDepartmentsWithOid",
+            data: "oId=" + oId,
+            type: "GET",
+            success: function (result) {
+                //{"code":100,"msg":"处理成功！",
+                //"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
+                //console.log(result);
+                //显示部门信息在下拉列表中
+                //$("#empAddModal select").append("")
+                $.each(result.extend.deps, function () {
+                    var optionEle = $("<option></option>").append(this.dName).attr("value", this.dId);
+                    optionEle.appendTo(ele4);
+                });
+                $(ele4).trigger('change');
+                if (dId != null) {
+                    $("#department_update_select").val(dId);
+                }
+            }
+        });
+
+    }
 
     $("#search_office_details").click(function () {
         to_page(1);
@@ -746,6 +835,7 @@
         });
 
     }
+
     //单个删除
     $(document).on("click", ".delete_btn", function () {
         //1、弹出是否确认删除对话框
@@ -882,6 +972,17 @@
     function changeSelectOffice() {
         to_page(1);
     }
+
+    $("#used_first").click(function () {
+//        $("#checkBoxUsed").trigger('change');
+        if ($("#checkBoxUsed").is(":checked")) {
+            $("#checkBoxUsed").prop("checked", false);
+        } else {
+            $("#checkBoxUsed").prop("checked", true);
+        }
+        to_page(1);
+    });
+
 </script>
 </body>
 </html>

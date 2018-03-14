@@ -57,7 +57,7 @@ public class OfficeDetailController {
     @RequestMapping("/officeDetailAll")
     @ResponseBody
     public Msg getDatasAll(
-            @RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam(value = "address_search_select", defaultValue = "") String address_search_select, @RequestParam(value = "ip_search_input", defaultValue = "") String ip_search_input, @RequestParam(value = "equipment_search_input", defaultValue = "") String equipment_search_input, @RequestParam(value = "officeId", defaultValue = "") String officeId, HttpServletRequest request) {
+            @RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam(value = "address_search_select", defaultValue = "") String address_search_select, @RequestParam(value = "ip_search_input", defaultValue = "") String ip_search_input, @RequestParam(value = "equipment_search_input", defaultValue = "") String equipment_search_input, @RequestParam(value = "officeId", defaultValue = "") String officeId, @RequestParam(value = "isSort", defaultValue = "false") boolean isSort, HttpServletRequest request) {
 
         System.out.println("传值" + address_search_select + "   " + ip_search_input + "  " + equipment_search_input); // 这不是一个分页查询
         // 引入PageHelper分页插件
@@ -65,7 +65,7 @@ public class OfficeDetailController {
         PageHelper.startPage(pn, 10);
         // startPage后面紧跟的这个查询就是一个分页查询
 //        List<LsEquipment> data = equipmentService.getAll();
-        List<LsEquipmentVo> data = equipmentService.getVoAllEquipment(officeId, address_search_select, ip_search_input, equipment_search_input);
+        List<LsEquipmentVo> data = equipmentService.getVoAllEquipment(officeId, address_search_select, ip_search_input, equipment_search_input,isSort);
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getIpTag().equals("0")) {
                 data.get(i).setIpTag("是");
@@ -83,6 +83,7 @@ public class OfficeDetailController {
         System.out.println("----------->>" + page.toString());
         return Msg.success().add("pageInfo", page);
     }
+
 
     /*public List<LsEquipmentVo> getResult( String officeId, String address_search_select, String ip_search_input, String equipment_search_input) {
        List<LsEquipment> data = equipmentService.getAll();

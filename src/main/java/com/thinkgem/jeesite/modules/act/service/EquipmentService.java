@@ -44,8 +44,8 @@ public class EquipmentService {
         return lsEquipmentMapper.selectBySearchMap(new SearchMapNew(officeId, equipment_search_input, address_search_select, ip_search_input));
     }
 
-    public List<LsEquipmentVo> getVoAllEquipment(String officeId, String address_search_select, String ip_search_input, String equipment_search_input) {
-        return lsEquipmentMapper.selectBySearchMapForUserUtils(new SearchMapNew(officeId, equipment_search_input, address_search_select, ip_search_input));
+    public List<LsEquipmentVo> getVoAllEquipment(String officeId, String address_search_select, String ip_search_input, String equipment_search_input,boolean isSort) {
+        return lsEquipmentMapper.selectBySearchMapForUserUtils(new SearchMapNew(officeId, equipment_search_input, address_search_select, ip_search_input,isSort));
     }
 
 
@@ -145,7 +145,7 @@ public class EquipmentService {
         lsEquipmentMapper.insert(lsEquipment);
     }
 
-    public void savaDataByBatch(List<LsEquipment> lsEquipments){
+    public void savaDataByBatch(List<LsEquipment> lsEquipments) {
         lsEquipmentMapper.insertByBatch(lsEquipments);
     }
 

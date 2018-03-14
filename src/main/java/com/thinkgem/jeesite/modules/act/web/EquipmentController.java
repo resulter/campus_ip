@@ -165,7 +165,10 @@ public class EquipmentController {
             String username = lsEquipment.getUsername();
 
             LsDepartment lsDepartment = departmentService.getData(Integer.parseInt(dId));
-            String dName = lsDepartment.getdName();
+            String dName = "";
+            if(lsDepartment!=null) {
+                 dName = lsDepartment.getdName();
+            }
 
             LsIp lsIp = ipService.getData(Integer.parseInt(iId));
             String ip = lsIp.getIp();
@@ -185,7 +188,9 @@ public class EquipmentController {
 
 
             LsEquipmentVo result = new LsEquipmentVo(eId, iId, oName, oId, address, minAddress, maxAddress, mask, nId, ip, tag, dId, dName, equipmentName, location, username, password, remark);
-            return Msg.success().add("equipmentVo", result);
+            System.out.println("vo===>>" + result);
+            String network = StringUtils.substringBeforeLast(minAddress, ".");
+            return Msg.success().add("equipmentVo", result).add("network",network);
         } else {
             return Msg.fail().add("equipmentVo", null);
         }
