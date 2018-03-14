@@ -100,7 +100,7 @@
 
 
                 $(".view-own").click(function () {
-                    window.location.href = "/a/officeDetail?officeId=" + $(this).attr("data-id");
+                    window.location.href = "${APP_PATH}/a/officeDetail?officeId=" + $(this).attr("data-id");
                 });
             }
         });
