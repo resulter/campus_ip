@@ -656,7 +656,7 @@
                 console.log("---->" + result);
                 var myData = result.extend.equipmentVo;
 
-                alert(myData.oId);
+//                alert(myData.oId);
 
 //                alert(myData.officeName);
 //                alert(myData.campusName);
@@ -686,7 +686,7 @@
     }
 
     function initEditiModal(ele1, oId, ele2, nId, ele3, iId, ele4, dId) {
-        alert(oId+"  " + nId +"   " +iId + "   " + dId);
+//        alert(oId+"  " + nId +"   " +iId + "   " + dId);
         //设置校区默认值
         //清空之前下拉列表的值
         $(ele1).empty();
