@@ -134,6 +134,8 @@ public class OfficeSchoolController {
 //            officeSchoolService.saveData(lsOffice);
             officeSchoolService.saveDataGetId(lsOffice);
             int oId = lsOffice.getoId();
+            // 清除用户菜单缓存
+            UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
             return Msg.success().add("oId",oId);
         }
     }
@@ -214,6 +216,8 @@ public class OfficeSchoolController {
     public Msg saveData(LsOffice lsOffice, HttpServletRequest request) {
         System.out.println("lsOffice    --- >   " + lsOffice);
         officeSchoolService.updateData(lsOffice);
+        // 清除用户菜单缓存
+        UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
         return Msg.success();
     }
 
@@ -242,6 +246,8 @@ public class OfficeSchoolController {
             Integer id = Integer.parseInt(ids);
             officeSchoolService.deleteData(id);
         }
+        // 清除用户菜单缓存
+        UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
         return Msg.success();
     }
 
