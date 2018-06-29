@@ -203,7 +203,11 @@ public class EquipmentController {
         System.out.println("lsOffice    --- >   " + lsEquipmentVo);
 
         LsEquipment lsEquipment = new LsEquipment(lsEquipmentVo.geteId(),lsEquipmentVo.getiId(), lsEquipmentVo.getdId(), lsEquipmentVo.getEquipmentName(), lsEquipmentVo.getLocation(), lsEquipmentVo.getUsername(), lsEquipmentVo.getPassword(), lsEquipmentVo.getRemark());
-        equipmentService.updateData(lsEquipment);
+        if(lsEquipment.geteId().equals(-1)){
+            equipmentService.saveData(new LsEquipment(lsEquipmentVo.getiId(), lsEquipmentVo.getdId(), lsEquipmentVo.getEquipmentName(), lsEquipmentVo.getLocation(), lsEquipmentVo.getUsername(), lsEquipmentVo.getPassword(), lsEquipmentVo.getRemark()));
+        }else {
+            equipmentService.updateData(lsEquipment);
+        }
         return Msg.success();
     }
 

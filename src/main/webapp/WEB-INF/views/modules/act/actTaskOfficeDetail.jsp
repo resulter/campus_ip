@@ -792,10 +792,13 @@
         if (!validate_update_form()) {
             return false;
         }
-
+        var idExist = $(this).attr("edit-id");
+        if(typeof $(this).attr("edit-id")=="undefined"){
+            idExist = -1;
+        }
         //2、发送ajax请求保存更新的员工数据
         $.ajax({
-            url: "${APP_PATH}/a/equipment/" + $(this).attr("edit-id"),
+            url: "${APP_PATH}/a/equipment/" + idExist,
             type: "PUT",
             data: $("#empUpdateModal form").serialize(),
             success: function (result) {
