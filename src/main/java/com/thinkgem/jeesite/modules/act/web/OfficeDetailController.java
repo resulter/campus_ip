@@ -20,10 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
+/**数据查询详情，即点击左侧菜单后的每一个校区的详情
  * 处理基础信息CRUD请求
  *
- * @author lfy
  */
 @Controller
 @RequestMapping(value = "/a/")

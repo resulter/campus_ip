@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 设备管理
  * 处理基础信息CRUD请求
  *
- * @author lfy
  */
 @Controller
 @RequestMapping(value = "/a/")

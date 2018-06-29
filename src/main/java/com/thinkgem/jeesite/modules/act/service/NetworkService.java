@@ -3,11 +3,10 @@ package com.thinkgem.jeesite.modules.act.service;
 
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.act.dao.LsAddressMapper;
+import com.thinkgem.jeesite.modules.act.dao.LsEquipmentMapper;
+import com.thinkgem.jeesite.modules.act.dao.LsIpMapper;
 import com.thinkgem.jeesite.modules.act.dao.LsOfficeMapper;
-import com.thinkgem.jeesite.modules.act.entity.LsAddress;
-import com.thinkgem.jeesite.modules.act.entity.LsAddressExample;
-import com.thinkgem.jeesite.modules.act.entity.LsOffice;
-import com.thinkgem.jeesite.modules.act.entity.LsOfficeExample;
+import com.thinkgem.jeesite.modules.act.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,10 @@ public class NetworkService {
 
     @Autowired
     LsAddressMapper lsAddressMapper;
-
+    @Autowired
+    LsIpMapper lsIpMapper;
+    @Autowired
+    LsEquipmentMapper lsEquipmentMapper;
 
 
     /**
@@ -68,7 +70,16 @@ public class NetworkService {
      * @param id
      */
     public void deleteData(Integer id) {
-        // TODO Auto-generated method stub
+        LsAddress lsAddress = lsAddressMapper.selectByPrimaryKey(id);
+        LsIpExample lsIpExample = new LsIpExample();
+        lsIpExample.createCriteria().andNIdEqualTo(lsAddress.getnId().toString());
+        List<LsIp> lsIps = lsIpMapper.selectByExample(lsIpExample);
+        for (LsIp lsIp:lsIps) {
+            LsEquipmentExample lsEquipmentExample = new LsEquipmentExample();
+            lsEquipmentExample.createCriteria().andIIdEqualTo(lsIp.getiId().toString());
+            lsEquipmentMapper.deleteByExample(lsEquipmentExample);
+        }
+        lsIpMapper.deleteByExample(lsIpExample);
         lsAddressMapper.deleteByPrimaryKey(id);
     }
 
@@ -77,6 +88,19 @@ public class NetworkService {
         LsAddressExample example = new LsAddressExample();
         LsAddressExample.Criteria criteria = example.createCriteria();
         criteria.andNIdIn(ids);
+
+        List<LsAddress> lsAddresses = lsAddressMapper.selectByExample(example);
+        for (LsAddress lsAddress:lsAddresses) {
+            LsIpExample lsIpExample = new LsIpExample();
+            lsIpExample.createCriteria().andNIdEqualTo(lsAddress.getnId().toString());
+            List<LsIp> lsIps = lsIpMapper.selectByExample(lsIpExample);
+            for (LsIp lsIp:lsIps) {
+                LsEquipmentExample lsEquipmentExample = new LsEquipmentExample();
+                lsEquipmentExample.createCriteria().andIIdEqualTo(lsIp.getiId().toString());
+                lsEquipmentMapper.deleteByExample(lsEquipmentExample);
+            }
+            lsIpMapper.deleteByExample(lsIpExample);
+        }
         lsAddressMapper.deleteByExample(example);
     }
 

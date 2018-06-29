@@ -23,9 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 网段管理
+ * 注：network = address = 网段
  * 处理基础信息CRUD请求
  *
- * @author lfy
  */
 @Controller
 @RequestMapping(value = "/a/")

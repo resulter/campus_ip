@@ -234,8 +234,8 @@
         var ul = $("<ul></ul>").addClass("pagination");
 
         //构建元素
-        var firstPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("首页").attr("href", "#"));
-        var prePageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("&laquo;"));
+        var firstPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("首页").attr("href", "#"));
+        var prePageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("&laquo;").attr("href", "#"));
         if (result.extend.pageInfo.hasPreviousPage == false) {
             firstPageLi.addClass("disabled");
             prePageLi.addClass("disabled");
@@ -250,8 +250,8 @@
         }
 
 
-        var nextPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("&raquo;"));
-        var lastPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("末页").attr("href", "#"));
+        var nextPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("&raquo;").attr("href", "#"));
+        var lastPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("末页").attr("href", "#"));
         if (result.extend.pageInfo.hasNextPage == false) {
             nextPageLi.addClass("disabled");
             lastPageLi.addClass("disabled");
@@ -270,7 +270,7 @@
         //1,2，3遍历给ul中添加页码提示
         $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
 
-            var numLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append(item));
+            var numLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append(item).attr("href", "#"));
             if (result.extend.pageInfo.pageNum == item) {
                 numLi.addClass("active");
             }

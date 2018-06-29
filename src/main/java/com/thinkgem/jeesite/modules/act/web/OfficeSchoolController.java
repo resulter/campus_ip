@@ -38,10 +38,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
+/**校区管理相关操作
  * 处理基础信息CRUD请求
  *
- * @author lfy
  */
 @Controller
 @RequestMapping(value = "/a/")
@@ -135,7 +134,6 @@ public class OfficeSchoolController {
 //            officeSchoolService.saveData(lsOffice);
             officeSchoolService.saveDataGetId(lsOffice);
             int oId = lsOffice.getoId();
-            System.out.println("啊啊啊啊啊啊啊啊啊" + oId);
             return Msg.success().add("oId",oId);
         }
     }

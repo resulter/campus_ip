@@ -123,7 +123,7 @@
                         <label class="col-sm-3 control-label">最小IP</label>
                         <div class="col-sm-8">
                             <input type="text" name="nMinAddress" class="form-control" id="min_ip_add_input"
-                                   placeholder="请输入最小IP">
+                                   placeholder="请输入最小IP，如“192.168.1.0”">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                         <label class="col-sm-3 control-label">最大IP</label>
                         <div class="col-sm-8">
                             <input type="text" name="nMaxAddress" class="form-control" id="max_ip_add_input"
-                                   placeholder="请输入最大IP">
+                                   placeholder="请输入最大IP，如“192.168.1.254”">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -290,8 +290,8 @@
         var ul = $("<ul></ul>").addClass("pagination");
 
         //构建元素
-        var firstPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("首页").attr("href", "#"));
-        var prePageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("&laquo;"));
+        var firstPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("首页").attr("href", "#"));
+        var prePageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("&laquo;").attr("href", "#"));
         if (result.extend.pageInfo.hasPreviousPage == false) {
             firstPageLi.addClass("disabled");
             prePageLi.addClass("disabled");
@@ -306,8 +306,8 @@
         }
 
 
-        var nextPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("&raquo;"));
-        var lastPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append("末页").attr("href", "#"));
+        var nextPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("&raquo;").attr("href", "#"));
+        var lastPageLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append("末页").attr("href", "#"));
         if (result.extend.pageInfo.hasNextPage == false) {
             nextPageLi.addClass("disabled");
             lastPageLi.addClass("disabled");
@@ -326,7 +326,7 @@
         //1,2，3遍历给ul中添加页码提示
         $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
 
-            var numLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 20px'></li>").append($("<a></a>").append(item));
+            var numLi = $("<li style='display: inline;margin-left: 5px;margin-right5px;font-size: 14px'></li>").append($("<a></a>").append(item).attr("href", "#"));
             if (result.extend.pageInfo.pageNum == item) {
                 numLi.addClass("active");
             }

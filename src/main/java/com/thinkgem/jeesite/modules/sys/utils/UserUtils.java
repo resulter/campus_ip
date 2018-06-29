@@ -175,6 +175,8 @@ public class UserUtils {
      * @return
      */
     public static List<Menu> getMenuList() {
+        // 清除用户菜单缓存
+        UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
         @SuppressWarnings("unchecked")
         List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
 //        UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);

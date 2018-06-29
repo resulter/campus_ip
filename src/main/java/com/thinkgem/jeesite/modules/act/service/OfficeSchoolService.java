@@ -4,8 +4,7 @@ package com.thinkgem.jeesite.modules.act.service;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.modules.act.dao.BaseDataMapper;
-import com.thinkgem.jeesite.modules.act.dao.LsOfficeMapper;
+import com.thinkgem.jeesite.modules.act.dao.*;
 import com.thinkgem.jeesite.modules.act.entity.*;
 import com.thinkgem.jeesite.modules.sys.entity.Office;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,13 @@ public class OfficeSchoolService {
 
     @Autowired
     LsOfficeMapper lsOfficeMapper;
+
+    @Autowired
+    LsAddressMapper lsAddressMapper;
+    @Autowired
+    LsIpMapper lsIpMapper;
+    @Autowired
+    LsEquipmentMapper lsEquipmentMapper;
 
     /**
      * 查询所有校区
@@ -95,7 +101,22 @@ public class OfficeSchoolService {
      * @param id
      */
     public void deleteData(Integer id) {
-        // TODO Auto-generated method stub
+        LsOffice lsOffice = lsOfficeMapper.selectByPrimaryKey(id);
+        LsAddressExample lsAddressExample = new LsAddressExample();
+        lsAddressExample.createCriteria().andOIdEqualTo(lsOffice.getoId().toString());
+        List<LsAddress> lsAddresses = lsAddressMapper.selectByExample(lsAddressExample);
+        for (LsAddress lsAddress:lsAddresses) {
+            LsIpExample lsIpExample = new LsIpExample();
+            lsIpExample.createCriteria().andNIdEqualTo(lsAddress.getnId().toString());
+            List<LsIp> lsIps = lsIpMapper.selectByExample(lsIpExample);
+            for (LsIp lsIp:lsIps) {
+                LsEquipmentExample lsEquipmentExample = new LsEquipmentExample();
+                lsEquipmentExample.createCriteria().andIIdEqualTo(lsIp.getiId().toString());
+                lsEquipmentMapper.deleteByExample(lsEquipmentExample);
+            }
+            lsIpMapper.deleteByExample(lsIpExample);
+        }
+        lsAddressMapper.deleteByExample(lsAddressExample);
         lsOfficeMapper.deleteByPrimaryKey(id);
     }
 
@@ -104,6 +125,25 @@ public class OfficeSchoolService {
         LsOfficeExample example1 = new LsOfficeExample();
         LsOfficeExample.Criteria criteria1 = example1.createCriteria();
         criteria1.andOIdIn(ids);
+
+        List<LsOffice> lsOffices = lsOfficeMapper.selectByExample(example1);
+        for (LsOffice lsOffice:lsOffices) {
+            LsAddressExample lsAddressExample = new LsAddressExample();
+            lsAddressExample.createCriteria().andOIdEqualTo(lsOffice.getoId().toString());
+            List<LsAddress> lsAddresses = lsAddressMapper.selectByExample(lsAddressExample);
+            for (LsAddress lsAddress:lsAddresses) {
+                LsIpExample lsIpExample = new LsIpExample();
+                lsIpExample.createCriteria().andNIdEqualTo(lsAddress.getnId().toString());
+                List<LsIp> lsIps = lsIpMapper.selectByExample(lsIpExample);
+                for (LsIp lsIp:lsIps) {
+                    LsEquipmentExample lsEquipmentExample = new LsEquipmentExample();
+                    lsEquipmentExample.createCriteria().andIIdEqualTo(lsIp.getiId().toString());
+                    lsEquipmentMapper.deleteByExample(lsEquipmentExample);
+                }
+                lsIpMapper.deleteByExample(lsIpExample);
+            }
+            lsAddressMapper.deleteByExample(lsAddressExample);
+        }
         lsOfficeMapper.deleteByExample(example1);
     }
 
